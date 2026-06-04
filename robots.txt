@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /
 
-# Sitemap: https://martinblume.de/sitemap.xml
+# Sitemap: https://yawn9.github.io/sitemap.xml
