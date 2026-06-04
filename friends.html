@@ -296,26 +296,15 @@
       line-height: 1.6;
     }
 
-    /* 3-column post grid */
-    .ig-post-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-    }
-    .ig-post-item {
-      aspect-ratio: 1 / 1;
-      background-image:
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-      background-size: 200px 200px;
+    /* Embedded posts */
+    .ig-posts {
+      padding: 1rem 1.2rem 0.5rem;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      gap: 1rem;
     }
-    .ig-post-item:nth-child(1) { background-color: #0f0d0b; }
-    .ig-post-item:nth-child(2) { background-color: #0c0b0a; }
-    .ig-post-item:nth-child(3) { background-color: #100e0c; }
-
-    .ig-post-icon { opacity: 0.1; }
+    .ig-posts .instagram-media { margin: 0 !important; }
 
     .ig-embed-footer {
       padding: 0.9rem 1.2rem;
@@ -603,29 +592,39 @@
 
       <hr class="ig-embed-sep">
 
-      <!-- Post grid — replace .ig-post-item divs with <img> tags when you have photos -->
-      <div class="ig-post-grid" aria-label="Letzte Beiträge">
-        <div class="ig-post-item">
-          <svg class="ig-post-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <rect x="2" y="6" width="20" height="15" rx="2" stroke="#d4c4a8" stroke-width="1"/>
-            <circle cx="12" cy="13.5" r="3.5" stroke="#d4c4a8" stroke-width="1"/>
-            <path d="M8 6V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1" stroke="#d4c4a8" stroke-width="1"/>
-          </svg>
-        </div>
-        <div class="ig-post-item">
-          <svg class="ig-post-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <rect x="2" y="6" width="20" height="15" rx="2" stroke="#d4c4a8" stroke-width="1"/>
-            <circle cx="12" cy="13.5" r="3.5" stroke="#d4c4a8" stroke-width="1"/>
-            <path d="M8 6V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1" stroke="#d4c4a8" stroke-width="1"/>
-          </svg>
-        </div>
-        <div class="ig-post-item">
-          <svg class="ig-post-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <rect x="2" y="6" width="20" height="15" rx="2" stroke="#d4c4a8" stroke-width="1"/>
-            <circle cx="12" cy="13.5" r="3.5" stroke="#d4c4a8" stroke-width="1"/>
-            <path d="M8 6V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1" stroke="#d4c4a8" stroke-width="1"/>
-          </svg>
-        </div>
+      <!-- Instagram post embeds -->
+      <div class="ig-posts">
+
+        <blockquote class="instagram-media" data-instgrm-captioned
+          data-instgrm-permalink="https://www.instagram.com/p/DVWLXCOjBzH/?utm_source=ig_embed&amp;utm_campaign=loading"
+          data-instgrm-version="14"
+          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:calc(100% - 2px);">
+          <div style="padding:16px;">
+            <a href="https://www.instagram.com/p/DVWLXCOjBzH/?utm_source=ig_embed&amp;utm_campaign=loading" style="background:#FFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%;" target="_blank"> </a>
+            <p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center;text-overflow:ellipsis;white-space:nowrap;"><a href="https://www.instagram.com/p/DVWLXCOjBzH/?utm_source=ig_embed&amp;utm_campaign=loading" style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:17px;text-decoration:none;" target="_blank">Ein Beitrag geteilt von Alissa Gans (@alissas.archive)</a></p>
+          </div>
+        </blockquote>
+
+        <blockquote class="instagram-media" data-instgrm-captioned
+          data-instgrm-permalink="https://www.instagram.com/p/DU_NgxEDNj2/?utm_source=ig_embed&amp;utm_campaign=loading"
+          data-instgrm-version="14"
+          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:calc(100% - 2px);">
+          <div style="padding:16px;">
+            <a href="https://www.instagram.com/p/DU_NgxEDNj2/?utm_source=ig_embed&amp;utm_campaign=loading" style="background:#FFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%;" target="_blank"> </a>
+            <p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center;text-overflow:ellipsis;white-space:nowrap;"><a href="https://www.instagram.com/p/DU_NgxEDNj2/?utm_source=ig_embed&amp;utm_campaign=loading" style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:17px;text-decoration:none;" target="_blank">Ein Beitrag geteilt von Alissa Gans (@alissas.archive)</a></p>
+          </div>
+        </blockquote>
+
+        <blockquote class="instagram-media" data-instgrm-captioned
+          data-instgrm-permalink="https://www.instagram.com/p/DO24N6bDGfw/?utm_source=ig_embed&amp;utm_campaign=loading"
+          data-instgrm-version="14"
+          style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:calc(100% - 2px);">
+          <div style="padding:16px;">
+            <a href="https://www.instagram.com/p/DO24N6bDGfw/?utm_source=ig_embed&amp;utm_campaign=loading" style="background:#FFF;line-height:0;padding:0;text-align:center;text-decoration:none;width:100%;" target="_blank"> </a>
+            <p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center;text-overflow:ellipsis;white-space:nowrap;"><a href="https://www.instagram.com/p/DO24N6bDGfw/?utm_source=ig_embed&amp;utm_campaign=loading" style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:17px;text-decoration:none;" target="_blank">Ein Beitrag geteilt von Alissa Gans (@alissas.archive)</a></p>
+          </div>
+        </blockquote>
+
       </div>
 
       <div class="ig-embed-footer">
@@ -897,5 +896,6 @@
   }
   init();
 </script>
+<script async src="//www.instagram.com/embed.js"></script>
 </body>
 </html>
