@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Memorial -->
+  <url>
+    <loc>https://martinblume.de/</loc>
+    <priority>1.0</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://martinblume.de/gallery.html</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <!-- Feinste Photographien (DE) -->
+  <url><loc>https://martinblume.de/feinste-photographien/philosophie.html</loc><priority>0.6</priority></url>
+  <url><loc>https://martinblume.de/feinste-photographien/projekte.html</loc><priority>0.5</priority></url>
+  <url><loc>https://martinblume.de/feinste-photographien/ausstellungen.html</loc><priority>0.5</priority></url>
+  <url><loc>https://martinblume.de/feinste-photographien/publikationen.html</loc><priority>0.5</priority></url>
+  <url><loc>https://martinblume.de/feinste-photographien/referenzen.html</loc><priority>0.5</priority></url>
+  <url><loc>https://martinblume.de/feinste-photographien/vita.html</loc><priority>0.5</priority></url>
+
+  <!-- Feinste Photographien (FR) -->
+  <url><loc>https://martinblume.de/feinste-photographien/philosophie-fr.html</loc><priority>0.5</priority></url>
+  <url><loc>https://martinblume.de/feinste-photographien/projets.html</loc><priority>0.4</priority></url>
+  <url><loc>https://martinblume.de/feinste-photographien/expositions.html</loc><priority>0.4</priority></url>
+
+  <!-- Academia Palatina -->
+  <url><loc>https://martinblume.de/academia-palatina/photographie-de.html</loc><priority>0.5</priority></url>
+  <url><loc>https://martinblume.de/academia-palatina/photographie-fr.html</loc><priority>0.4</priority></url>
+  <url><loc>https://martinblume.de/academia-palatina/workshops-de.html</loc><priority>0.4</priority></url>
+  <url><loc>https://martinblume.de/academia-palatina/aktuelles-de.html</loc><priority>0.4</priority></url>
+
+  <!-- Real Photography -->
+  <url><loc>https://martinblume.de/real-photography/photos.html</loc><priority>0.5</priority></url>
+  <url><loc>https://martinblume.de/real-photography/exhibitions.html</loc><priority>0.4</priority></url>
+  <url><loc>https://martinblume.de/real-photography/vita.html</loc><priority>0.4</priority></url>
+
+  <!-- fineart-ultralarge -->
+  <url><loc>https://martinblume.de/fineart-ultralarge/vita.html</loc><priority>0.5</priority></url>
+  <url><loc>https://martinblume.de/fineart-ultralarge/sonderditionen.html</loc><priority>0.4</priority></url>
+  <url><loc>https://martinblume.de/fineart-ultralarge/workshops.html</loc><priority>0.4</priority></url>
+
+</urlset>

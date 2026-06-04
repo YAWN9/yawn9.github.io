@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galerie — Martin Blume</title>
+  <meta name="description" content="Photographien von Martin Blume — eine Auswahl aus seinem Werk.">
+  <link rel="icon" href="profile.gif">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #897052;
+      --text: #bfad98;
+      --text-dim: #7a6a58;
+      --bg: #0e0e0e;
+      --rule: #1e1e1e;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: #c8a870; }
+
+    .page { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+
+    /* Nav */
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 48px;
+    }
+
+    .top-nav-back {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .top-nav-title {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* Section headings */
+    .series-heading {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 48px 0 20px;
+    }
+
+    .series-heading:first-of-type { margin-top: 0; }
+
+    .series-desc {
+      font-size: 13px;
+      color: var(--text-dim);
+      max-width: 560px;
+      margin-bottom: 24px;
+      line-height: 1.7;
+    }
+
+    /* Grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 3px;
+      margin-bottom: 4px;
+    }
+
+    .photo-grid.portrait-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    /* Real photo */
+    .photo-item {
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: #111;
+      position: relative;
+      cursor: zoom-in;
+    }
+
+    .photo-item.portrait { aspect-ratio: 3/4; }
+
+    .photo-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(10%);
+      transition: filter 0.4s, transform 0.4s;
+    }
+
+    .photo-item:hover img {
+      filter: grayscale(0%);
+      transform: scale(1.04);
+    }
+
+    .photo-caption {
+      font-size: 11px;
+      color: #3a3028;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      letter-spacing: 0.05em;
+      padding: 6px 0 0;
+      margin-bottom: 24px;
+    }
+
+    /* Placeholder */
+    .photo-placeholder {
+      aspect-ratio: 4/3;
+      border: 1px solid #161616;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      background: #0a0a0a;
+    }
+
+    .photo-placeholder.portrait { aspect-ratio: 3/4; }
+
+    .ph-icon {
+      margin-bottom: 12px;
+      opacity: 0.15;
+    }
+
+    .ph-icon img { width: 48px; height: auto; filter: invert(1); }
+
+    .ph-series {
+      font-size: 12px;
+      color: #251f18;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+
+    .ph-year {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: #1a1510;
+    }
+
+    /* Call to action */
+    .contribute {
+      border: 1px solid #1a1a1a;
+      padding: 28px 32px;
+      margin: 48px 0;
+      max-width: 560px;
+    }
+
+    .contribute p { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+    .contribute p + p { margin-top: 1em; }
+
+    /* Lightbox */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.93);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+
+    #lightbox.open { display: flex; }
+
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    #lightbox-close {
+      position: absolute;
+      top: 20px; right: 28px;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #3a3028;
+      cursor: pointer;
+    }
+
+    #lightbox-close:hover { color: var(--text-dim); }
+
+    /* Footer */
+    .page-footer {
+      border-top: 1px solid var(--rule);
+      padding: 20px 0;
+      margin-top: 60px;
+      text-align: center;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #282828;
+    }
+  </style>
+</head>
+<body>
+
+<div id="lightbox" onclick="closeLightbox()">
+  <span id="lightbox-close">Schließen &times;</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<div class="page">
+
+  <div class="top-nav">
+    <a href="index.html" class="top-nav-back">&larr; In Memoriam</a>
+    <span class="top-nav-title">Martin Blume &nbsp;&middot;&nbsp; Galerie</span>
+  </div>
+
+  <!-- Vestiges -->
+  <p class="series-heading">Vestiges &nbsp;&middot;&nbsp; 2005</p>
+  <p class="series-desc">
+    Gemeinsam mit dem amerikanischen Photographen Douglas Isaac Busch.
+    Burgen in Pfalz und Elsaß sowie indianische Festungen im Südwesten Nordamerikas.
+    Martin Blume photographierte mit der Toyo 810&nbsp;M (8×10&nbsp;inch).
+  </p>
+  <div class="photo-grid">
+    <div class="photo-item" onclick="openLightbox(this)">
+      <img src="real-photography/images/night_views.jpg"
+           alt="Vestiges — Burg Trifels, Annweiler am Trifels, 2005">
+    </div>
+    <div class="photo-placeholder">
+      <div class="ph-icon"><img src="profile.gif" alt=""></div>
+      <span class="ph-series">Vestiges II</span>
+      <span class="ph-year">2005</span>
+    </div>
+    <div class="photo-placeholder">
+      <div class="ph-icon"><img src="profile.gif" alt=""></div>
+      <span class="ph-series">Vestiges III</span>
+      <span class="ph-year">2005</span>
+    </div>
+  </div>
+  <p class="photo-caption">Ausstellung: Burg Trifels, Annweiler am Trifels &nbsp;&middot;&nbsp; Maison de l'Archéologie, Niederbronn-les-Bains &nbsp;&middot;&nbsp; Landesmuseum Koblenz</p>
+
+  <!-- Special Editions -->
+  <p class="series-heading">Sonderditionen &nbsp;&middot;&nbsp; Special Editions &nbsp;&middot;&nbsp; 2002 – 2005</p>
+  <p class="series-desc">
+    Vierteljährliche Editionen auf Barytpapier, 40×50&nbsp;cm Passepartout.
+    Jedes Motiv erscheint in limitierter Auflage.
+  </p>
+  <div class="photo-grid">
+    <div class="photo-item" onclick="openLightbox(this)">
+      <img src="fineart-ultralarge/images/mbtitle.jpg"
+           alt="Three Windows — Special Edition I-2005">
+    </div>
+    <div class="photo-placeholder">
+      <div class="ph-icon"><img src="profile.gif" alt=""></div>
+      <span class="ph-series">Trees and Fog</span>
+      <span class="ph-year">I-2004</span>
+    </div>
+    <div class="photo-placeholder">
+      <div class="ph-icon"><img src="profile.gif" alt=""></div>
+      <span class="ph-series">Drachenfels</span>
+      <span class="ph-year">2004</span>
+    </div>
+  </div>
+  <p class="photo-caption">Three Windows — Special Edition I-2005</p>
+
+  <!-- Auschwitz -->
+  <p class="series-heading">Auschwitz heute &nbsp;&middot;&nbsp; 2015</p>
+  <p class="series-desc">
+    Projekt gemeinsam mit der Bundeszentrale für politische Bildung (bpb) und dem
+    Auschwitz-Birkenau State Museum. Anlässlich des 70. Jahrestages der Befreiung,
+    27. Januar 2015.
+  </p>
+  <div class="photo-grid">
+    <div class="photo-placeholder">
+      <div class="ph-icon"><img src="profile.gif" alt=""></div>
+      <span class="ph-series">Auschwitz heute I</span>
+      <span class="ph-year">2015</span>
+    </div>
+    <div class="photo-placeholder">
+      <div class="ph-icon"><img src="profile.gif" alt=""></div>
+      <span class="ph-series">Auschwitz heute II</span>
+      <span class="ph-year">2015</span>
+    </div>
+    <div class="photo-placeholder">
+      <div class="ph-icon"><img src="profile.gif" alt=""></div>
+      <span class="ph-series">Auschwitz heute III</span>
+      <span class="ph-year">2015</span>
+    </div>
+  </div>
+
+  <!-- Verdun -->
+  <p class="series-heading">Verdun — 100 Jahre danach &nbsp;&middot;&nbsp; 2014</p>
+  <p class="series-desc">
+    Gemeinsam mit Emmanuel Berry. Zwei Perspektiven — der Franzose und der Deutsche —
+    auf die Schlachtfelder von Verdun, 100 Jahre nach dem Beginn des Ersten Weltkrieges.
+  </p>
+  <div class="photo-grid">
+    <div class="photo-placeholder">
+      <div class="ph-icon"><img src="profile.gif" alt=""></div>
+      <span class="ph-series">Verdun I</span>
+      <span class="ph-year">2014</span>
+    </div>
+    <div class="photo-placeholder">
+      <div class="ph-icon"><img src="profile.gif" alt=""></div>
+      <span class="ph-series">Verdun II</span>
+      <span class="ph-year">2014</span>
+    </div>
+    <div class="photo-placeholder">
+      <div class="ph-icon"><img src="profile.gif" alt=""></div>
+      <span class="ph-series">Verdun III</span>
+      <span class="ph-year">2014</span>
+    </div>
+  </div>
+
+  <!-- Dom zu Mainz -->
+  <p class="series-heading">Der Dom zu Mainz &nbsp;&middot;&nbsp; 2008 – 2009</p>
+  <p class="series-desc">Bilder einer Kathedrale. Mit Bernd Radtke.</p>
+  <div class="photo-grid">
+    <div class="photo-placeholder">
+      <div class="ph-icon"><img src="profile.gif" alt=""></div>
+      <span class="ph-series">Dom zu Mainz I</span>
+      <span class="ph-year">2009</span>
+    </div>
+    <div class="photo-placeholder">
+      <div class="ph-icon"><img src="profile.gif" alt=""></div>
+      <span class="ph-series">Dom zu Mainz II</span>
+      <span class="ph-year">2009</span>
+    </div>
+  </div>
+
+  <!-- Série Populaire -->
+  <p class="series-heading">Série Populaire &nbsp;&middot;&nbsp; seit 1989</p>
+  <p class="series-desc">
+    Kleinformatige Barytabzüge, mit Selen getont, auf weißem Museumskarton.
+    Bildgröße ca. 11×11&nbsp;cm, Passepartout 24×18&nbsp;cm. Limitierte Auflage.
+  </p>
+  <div class="photo-grid portrait-grid">
+    <div class="photo-placeholder portrait">
+      <div class="ph-icon"><img src="profile.gif" alt=""></div>
+      <span class="ph-series">Série Populaire I</span>
+      <span class="ph-year">1989</span>
+    </div>
+    <div class="photo-placeholder portrait">
+      <div class="ph-icon"><img src="profile.gif" alt=""></div>
+      <span class="ph-series">Série Populaire II</span>
+      <span class="ph-year">1989</span>
+    </div>
+    <div class="photo-placeholder portrait">
+      <div class="ph-icon"><img src="profile.gif" alt=""></div>
+      <span class="ph-series">Série Populaire III</span>
+      <span class="ph-year">1989</span>
+    </div>
+    <div class="photo-placeholder portrait">
+      <div class="ph-icon"><img src="profile.gif" alt=""></div>
+      <span class="ph-series">Série Populaire IV</span>
+      <span class="ph-year">1989</span>
+    </div>
+  </div>
+
+  <!-- Contribute -->
+  <div class="contribute">
+    <p>
+      Diese Galerie ist unvollständig. Wenn Sie Photographien von Martin Blume besitzen
+      und diese hier zeigen möchten, nehmen Sie bitte Kontakt auf.
+    </p>
+    <p>
+      <em>This gallery is incomplete. If you own photographs by Martin Blume and would
+      like to share them here, please get in touch.</em>
+    </p>
+    <p style="margin-top:1.5em;">
+      <a href="index.html#kontakt">Kontakt &rarr;</a>
+    </p>
+  </div>
+
+</div><!-- /page -->
+
+<footer class="page-footer">
+  <p>&copy; Martin Blume &nbsp;&middot;&nbsp; Alle Rechte vorbehalten</p>
+</footer>
+
+<script>
+  function openLightbox(el) {
+    var img = el.querySelector('img');
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox-img').alt = img.alt;
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+
+</body>
+</html>

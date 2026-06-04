@@ -1,0 +1,267 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #0e0e0e;
+  color: #bfad98;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+a {
+  color: #897052;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #c8a870;
+}
+
+#wrapper {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+
+#header {
+  padding-top: 28px;
+}
+
+.logo-link {
+  display: block;
+}
+
+.logo-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Navigation */
+
+#mainmenu {
+  margin-top: 16px;
+  border-top: 1px solid #1e1e1e;
+  border-bottom: 1px solid #1e1e1e;
+  padding: 8px 0;
+}
+
+#mainmenu ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#mainmenu ul li + li {
+  border-left: 1px solid #252525;
+}
+
+#mainmenu ul li a,
+#mainmenu ul li span.active {
+  display: block;
+  padding: 4px 14px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 11.5px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: #7a6a58;
+  text-decoration: none;
+}
+
+#mainmenu ul li:first-child a,
+#mainmenu ul li:first-child span.active {
+  padding-left: 0;
+}
+
+#mainmenu ul li a:hover {
+  color: #b09878;
+}
+
+#mainmenu ul li span.active {
+  color: #897052;
+}
+
+/* Main content */
+
+#main {
+  padding: 48px 0 90px;
+  min-height: 360px;
+}
+
+.ce_text p {
+  margin-bottom: 1.3em;
+}
+
+.ce_text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Headings */
+
+h1 {
+  font-size: 18px;
+  font-weight: normal;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #c8b898;
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #897052;
+  margin: 2em 0 0.8em;
+}
+
+/* Featured image */
+
+.featured-image {
+  margin-bottom: 40px;
+}
+
+.featured-image img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.featured-caption {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #5a4d3e;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: 0.05em;
+}
+
+/* Philosophy / statement text */
+
+.statement {
+  max-width: 680px;
+  font-size: 15px;
+  line-height: 1.9;
+  color: #c0ad95;
+}
+
+.statement p {
+  margin-bottom: 1.3em;
+}
+
+/* Tables (CV, Collections) */
+
+table.cv-table {
+  border-collapse: collapse;
+  max-width: 680px;
+}
+
+table.cv-table td {
+  padding: 3px 16px 3px 0;
+  vertical-align: top;
+  line-height: 1.7;
+}
+
+table.cv-table td:first-child {
+  white-space: nowrap;
+  color: #897052;
+  min-width: 100px;
+}
+
+/* Collections list */
+
+.collections-list {
+  max-width: 600px;
+}
+
+.collections-list li {
+  list-style: none;
+  padding: 4px 0;
+  border-bottom: 1px solid #1a1a1a;
+  color: #bfad98;
+}
+
+.collections-list li:last-child {
+  border-bottom: none;
+}
+
+/* Exhibitions timeline */
+
+.exhibition {
+  margin-bottom: 2.2em;
+  padding-bottom: 2.2em;
+  border-bottom: 1px solid #1a1a1a;
+  max-width: 640px;
+}
+
+.exhibition:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.exhibition-date {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #897052;
+  margin-bottom: 4px;
+}
+
+.exhibition-title {
+  color: #d0bc9e;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.exhibition-venue {
+  font-size: 13px;
+  color: #7a6a58;
+  line-height: 1.6;
+}
+
+/* Special editions */
+
+.edition-block {
+  max-width: 560px;
+  margin-bottom: 3em;
+}
+
+/* Footer */
+
+#footer {
+  border-top: 1px solid #1a1a1a;
+  padding: 14px 0;
+  text-align: center;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #333;
+}
+
+/* Responsive */
+
+@media (max-width: 680px) {
+  #wrapper { padding: 0 14px; }
+
+  #mainmenu ul li a,
+  #mainmenu ul li span.active {
+    padding: 5px 8px;
+    font-size: 10.5px;
+    letter-spacing: 0.07em;
+  }
+
+  #mainmenu ul li:first-child a,
+  #mainmenu ul li:first-child span.active {
+    padding-left: 4px;
+  }
+}

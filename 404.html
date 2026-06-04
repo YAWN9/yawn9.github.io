@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seite nicht gefunden — Martin Blume</title>
+  <link rel="icon" href="profile.gif">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0e0e0e;
+      color: #bfad98;
+      font-family: Georgia, 'Times New Roman', serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .container { padding: 40px 24px; }
+
+    .logo {
+      margin: 0 auto 48px;
+      opacity: 0.25;
+    }
+
+    .logo img { width: 80px; height: auto; filter: invert(1); }
+
+    .code {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #3a3028;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      font-size: 18px;
+      color: #5a4d3e;
+      margin-bottom: 40px;
+      font-style: italic;
+    }
+
+    .home-link {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #897052;
+      text-decoration: none;
+      border: 1px solid #2a2218;
+      padding: 10px 24px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .home-link:hover {
+      border-color: #897052;
+      color: #c8a870;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="profile.gif" alt="Martin Blume">
+    </div>
+    <p class="code">404</p>
+    <p class="message">Diese Seite wurde nicht gefunden.</p>
+    <a href="index.html" class="home-link">Zurück zur Startseite</a>
+  </div>
+</body>
+</html>

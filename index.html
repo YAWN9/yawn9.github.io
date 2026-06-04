@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Martin Blume — In Memoriam</title>
+  <meta name="description" content="Martin Blume — Photograph. * 23. November 1956 in Herrsching/Ammersee · † 10. Mai 2015 in Landau i.d. Pfalz. Der mit dem Licht zeichnet.">
+
+  <!-- Open Graph / Social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://martinblume.de/">
+  <meta property="og:title" content="Martin Blume — In Memoriam">
+  <meta property="og:description" content="Photograph · * 23. November 1956 · † 10. Mai 2015 · Der mit dem Licht zeichnet.">
+  <meta property="og:image" content="https://martinblume.de/profile.gif">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Martin Blume — In Memoriam">
+  <meta name="twitter:description" content="Photograph · * 23. November 1956 · † 10. Mai 2015 · Der mit dem Licht zeichnet.">
+  <meta name="twitter:image" content="https://martinblume.de/profile.gif">
+
+  <!-- Favicon -->
+  <link rel="icon" href="profile.gif">
+  <link rel="shortcut icon" href="profile.gif">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #897052;
+      --gold-light: #c8a870;
+      --text: #bfad98;
+      --text-dim: #7a6a58;
+      --bg: #0e0e0e;
+      --rule: #1e1e1e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    a { color: var(--gold); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--gold-light); }
+
+    /* ── Wrapper ─────────────────────────── */
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Hero ────────────────────────────── */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .in-memoriam {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 32px;
+    }
+
+    .hero-name {
+      font-size: 36px;
+      font-weight: normal;
+      letter-spacing: 0.06em;
+      color: #d8c8b0;
+      margin-bottom: 14px;
+    }
+
+    .hero-dates {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      color: var(--text-dim);
+      margin-bottom: 48px;
+    }
+
+    .hero-dates .dagger { color: var(--gold); }
+
+    /* Portrait */
+    .portrait {
+      width: 220px;
+      height: auto;
+      display: block;
+      margin: 0 auto 40px;
+      filter: grayscale(20%);
+    }
+
+    /* Philosophy quote */
+    .quote-block {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .quote-de {
+      font-size: 16px;
+      line-height: 2;
+      color: #d0bc9e;
+      margin-bottom: 24px;
+    }
+
+    .quote-fr {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--text-dim);
+      font-style: italic;
+    }
+
+    .quote-sig {
+      margin-top: 22px;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ── Section layout ──────────────────── */
+    .section {
+      padding: 56px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section:last-of-type { border-bottom: none; }
+
+    .section-label {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 32px;
+    }
+
+    /* ── Vita table ──────────────────────── */
+    .vita-table { border-collapse: collapse; width: 100%; }
+    .vita-table td { padding: 4px 0; vertical-align: top; line-height: 1.7; }
+    .vita-table td:first-child {
+      white-space: nowrap;
+      color: var(--gold);
+      min-width: 130px;
+      padding-right: 20px;
+    }
+    .vita-group { margin-bottom: 2em; }
+    .vita-group-heading {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+
+    /* ── Exhibitions ─────────────────────── */
+    .exhibition { margin-bottom: 2em; }
+    .exhibition-date {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 3px;
+    }
+    .exhibition-title { color: #d0bc9e; margin-bottom: 2px; }
+    .exhibition-venue { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+
+    /* ── Publications ────────────────────── */
+    .pub { margin-bottom: 1.4em; }
+    .pub-title { color: var(--gold); }
+
+    /* ── Collections ─────────────────────── */
+    .collections-list { list-style: none; columns: 2; column-gap: 40px; }
+    .collections-list li {
+      padding: 3px 0;
+      border-bottom: 1px solid #161616;
+      break-inside: avoid;
+      font-size: 13px;
+    }
+    @media (max-width: 560px) { .collections-list { columns: 1; } }
+
+    /* ── Archive ─────────────────────────── */
+    .archive-header {
+      padding: 56px 0 32px;
+      text-align: center;
+    }
+
+    .archive-label {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+    }
+
+    .archive-sub {
+      font-size: 13px;
+      color: #3e3328;
+      letter-spacing: 0.03em;
+    }
+
+    .archive-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      padding-bottom: 80px;
+    }
+
+    .archive-entry {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .archive-entry:hover { opacity: 0.65; }
+
+    .archive-entry img {
+      display: block;
+      max-width: 260px;
+      width: 100%;
+      height: auto;
+      filter: brightness(0.55) sepia(0.25);
+      transition: filter 0.25s;
+    }
+    .archive-entry:hover img { filter: brightness(0.75) sepia(0.15); }
+
+    .archive-entry-title {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #4a3e30;
+    }
+
+    .archive-entry-years {
+      font-size: 11px;
+      color: #2e2820;
+      margin-top: -6px;
+    }
+
+    /* ── Sticky nav ──────────────────────── */
+    .page-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(14,14,14,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+      padding: 0;
+    }
+
+    .page-nav-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0;
+    }
+
+    .page-nav-links {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .page-nav a {
+      display: block;
+      padding: 10px 12px;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 9.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .page-nav a:hover { color: var(--gold-light); }
+
+    .page-nav-lang {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      color: #2e2820;
+    }
+
+    .page-nav-lang a { color: #3a3028; padding: 10px 6px; }
+    .page-nav-lang a:hover { color: var(--text-dim); }
+
+    /* ── Gallery preview ─────────────────── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 2px;
+      margin-bottom: 20px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 4/3;
+      background: #111;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(15%);
+      transition: filter 0.3s, transform 0.3s;
+    }
+
+    .gallery-item:hover img {
+      filter: grayscale(0%);
+      transform: scale(1.03);
+    }
+
+    .gallery-item-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #1a1a1a;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .gallery-item-placeholder .ph-title {
+      font-size: 12px;
+      color: #2a2318;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .gallery-item-placeholder .ph-year {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: #1e1a14;
+    }
+
+    .gallery-more {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* ── Condolences ──────────────────────── */
+    .condolence-note {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-bottom: 20px;
+      max-width: 520px;
+    }
+
+    /* ── Print ───────────────────────────── */
+    @media print {
+      .page-nav, .archive-header, .archive-grid,
+      .contact-form, .form-submit, .form-mailto,
+      .condolence-note, form { display: none !important; }
+
+      body { background: #fff; color: #111; font-size: 12pt; }
+      .hero { padding: 40px 0 30px; border-bottom: 1px solid #ccc; }
+      .hero-name { color: #111; font-size: 24pt; }
+      .hero-dates { color: #555; }
+      .quote-de { color: #111; font-size: 12pt; }
+      .quote-fr { color: #444; }
+      .quote-sig { color: #555; }
+      .section { border-bottom: 1px solid #ddd; padding: 30px 0; }
+      .section-label { color: #333; }
+      .vita-table td:first-child { color: #555; }
+      .exhibition-date { color: #555; }
+      .exhibition-title { color: #111; }
+      .exhibition-venue { color: #444; }
+      .pub-title { color: #333; }
+      .collections-list li { color: #333; border-bottom: 1px solid #eee; }
+      .site-footer { color: #999; border-top: 1px solid #ddd; }
+      a { color: #333; }
+      .portrait { filter: grayscale(100%); }
+    }
+
+    /* ── Contact form ────────────────────── */
+    .contact-form {
+      max-width: 520px;
+    }
+
+    .form-row {
+      margin-bottom: 18px;
+    }
+
+    .form-row label {
+      display: block;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+    }
+
+    .form-row input,
+    .form-row textarea {
+      width: 100%;
+      background: #141414;
+      border: 1px solid #252525;
+      color: var(--text);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 14px;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+
+    .form-row input:focus,
+    .form-row textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-row textarea {
+      height: 130px;
+      resize: vertical;
+    }
+
+    .form-submit {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 11px 28px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .form-submit:hover {
+      background: var(--gold);
+      color: #0e0e0e;
+    }
+
+    .form-mailto {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #3a3028;
+    }
+
+    .form-mailto a {
+      color: #4a3e30;
+    }
+
+    .form-mailto a:hover {
+      color: var(--text-dim);
+    }
+
+    /* ── Footer ──────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--rule);
+      padding: 20px 0;
+      text-align: center;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #282828;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="page-nav">
+  <div class="page-nav-inner">
+    <div class="page-nav-links">
+      <a href="#vita">Vita</a>
+      <a href="#ausstellungen">Ausstellungen</a>
+      <a href="#publikationen">Publikationen</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="#archiv">Archiv</a>
+    </div>
+    <div class="page-nav-lang">
+      <a href="feinste-photographien/philosophie-fr.html">Français</a>
+      &nbsp;<a href="real-photography/photos.html">English</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- ── HERO ─────────────────────────────── -->
+  <div class="hero">
+    <p class="in-memoriam">In Memoriam</p>
+    <h1 class="hero-name">Martin Blume</h1>
+    <p class="hero-dates">
+      * 23. November 1956, Herrsching/Ammersee
+      &nbsp;&nbsp;<span class="dagger">&dagger;</span>&nbsp;&nbsp;
+      10. Mai 2015, Landau i.d. Pfalz
+    </p>
+
+    <img src="feinste-photographien/images/philomb.jpg" alt="Martin Blume"
+         class="portrait" onerror="this.style.display='none'">
+
+    <div class="quote-block">
+      <p class="quote-de">
+        Das Sichtbarmachen der Vision, das Begreifbarmachen der Emotion,<br>
+        das gelingt mir am besten mit der Photographie.<br>
+        <br>
+        Eigentlich ist mir die Malerei am nächsten,<br>
+        aber ich bleibe doch letztendlich der, der ich bin:<br>
+        <br>
+        <strong>Der mit dem Licht zeichnet.</strong>
+      </p>
+      <p class="quote-fr">
+        Donner corps à une vision, rendre palpable une émotion —<br>
+        c'est à travers la photographie que j'y parviens le mieux.<br>
+        <br>
+        Mais je demeure fidèle à ce que je suis :<br>
+        <em>Celui qui peint avec la lumière.</em>
+      </p>
+      <p class="quote-sig">Martin Blume</p>
+    </div>
+  </div>
+
+  <!-- ── VITA ─────────────────────────────── -->
+  <div class="section" id="vita">
+    <p class="section-label">Vita</p>
+
+    <div class="vita-group">
+      <table class="vita-table">
+        <tr><td>1973 – 1976</td><td>Lehre als Chemigraph in Kaiserslautern</td></tr>
+        <tr><td>1984</td><td>Zweiter Bildungsweg, Abitur in Neuss</td></tr>
+        <tr><td>seit 1986</td><td>Intensive Auseinandersetzung mit dem Medium Photographie</td></tr>
+        <tr><td>1987 – 1988</td><td>Entwicklung der „Psychographie" aus der Synthese von Psychologie und Photographie</td></tr>
+        <tr><td>1989</td><td>Erste Ausgabe der „Série Populaire"</td></tr>
+        <tr><td>1991</td><td>Agfa-Ehrenpreis der „Large Format Photo Foundation" für „Bel Arbre"<br>Konzeption und Bau des 8×10inch Vergrößerers „Landauer II"</td></tr>
+        <tr><td>1994</td><td>Berufung in die „Deutsche Gesellschaft für Photographie" (DGPh)</td></tr>
+        <tr><td>1997</td><td>Diplom in Psychologie, Universität Koblenz-Landau</td></tr>
+        <tr><td>1998</td><td>Gründung der „Academia Palatina" zur Förderung der klassischen Schwarz-Weiß-Photographie</td></tr>
+        <tr><td>2004</td><td>Berufung in die „Arbeitsgemeinschaft Pfälzer Künstler" (APK)</td></tr>
+        <tr><td>2005</td><td>Initiierung der „Classic Photography"</td></tr>
+        <tr><td>2009</td><td>Kunstpreis der Stadt Annweiler am Trifels</td></tr>
+        <tr><td>2011</td><td>„Ludwig" – Ehrenpreis, Fototage Pirmasens</td></tr>
+        <tr><td>2012 – 2013</td><td>Aufbau und Ausführung „dm-Fotografie-Werkstatt" mit Breuer+Nohr und dm-drogerie markt</td></tr>
+        <tr><td>seit 2008</td><td>Künstlerische Beratung und Coaching</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── AUSSTELLUNGEN ─────────────────────── -->
+  <div class="section" id="ausstellungen">
+    <p class="section-label">Ausstellungen &middot; Expositions</p>
+
+    <div class="exhibition">
+      <p class="exhibition-date">2015</p>
+      <p class="exhibition-title"><strong style="color:var(--gold);">„Verdun — 100 Jahre danach. Eine deutsch-französische Spurensuche"</strong></p>
+      <p class="exhibition-venue">
+        2. April – 2. August 2015 &nbsp;&middot;&nbsp; Schloss Villa Ludwigshöhe, 67480 Edenkoben<br>
+        <em>gemeinsam mit Emmanuel Berry</em>
+      </p>
+    </div>
+
+    <div class="exhibition">
+      <p class="exhibition-date">2015</p>
+      <p class="exhibition-title"><strong style="color:var(--gold);">„Auschwitz heute"</strong></p>
+      <p class="exhibition-venue">
+        27. Januar 2015 — 70. Jahrestag der Befreiung<br>
+        Projekt gemeinsam mit der Bundeszentrale für politische Bildung (bpb) und dem Auschwitz-Birkenau State Museum
+      </p>
+    </div>
+
+    <div class="exhibition">
+      <p class="exhibition-date">2014</p>
+      <p class="exhibition-title"><strong style="color:var(--gold);">„Verdun — 100 Jahre danach. Eine deutsch-französische Spurensuche"</strong></p>
+      <p class="exhibition-venue">6. Juli – 26. Oktober 2014 &nbsp;&middot;&nbsp; Festung Ehrenbreitstein, 56077 Koblenz</p>
+    </div>
+
+    <div class="exhibition">
+      <p class="exhibition-date">2006 – 2007</p>
+      <p class="exhibition-title"><strong style="color:var(--gold);">„Vestiges"</strong></p>
+      <p class="exhibition-venue">
+        Landesmuseum Koblenz, Festung Ehrenbreitstein &nbsp;&middot;&nbsp; Berlin (Vertretung Rheinland-Pfalz) &nbsp;&middot;&nbsp; Mainz (LRP Landesbank)
+      </p>
+    </div>
+
+    <div class="exhibition">
+      <p class="exhibition-date">2005</p>
+      <p class="exhibition-title"><strong style="color:var(--gold);">„Vestiges"</strong> — Martin Blume &amp; Douglas I. Busch</p>
+      <p class="exhibition-venue">
+        September – Oktober 2005 &nbsp;&middot;&nbsp; Burg Trifels, Annweiler am Trifels<br>
+        Oktober – November 2005 &nbsp;&middot;&nbsp; Maison de l'Archéologie du Vosges du Nord, Niederbronn-les-Bains, Alsace
+      </p>
+    </div>
+
+    <div class="exhibition">
+      <p class="exhibition-date">1999 – 2000</p>
+      <p class="exhibition-title"><strong style="color:var(--gold);">„La Frontière en Tête — Die Grenze im Kopf"</strong></p>
+      <p class="exhibition-venue">
+        Kunstverein Villa Streccius, Landau i.d. Pfalz &nbsp;&middot;&nbsp;
+        Centre Européen d'Actions Artistiques Contemporaines, Strasbourg
+      </p>
+    </div>
+
+    <div class="exhibition">
+      <p class="exhibition-date">1993 – 1999</p>
+      <p class="exhibition-title">Zahlreiche Einzel- und Gruppenausstellungen</p>
+      <p class="exhibition-venue">
+        u.a. Nikon Galerie Düsseldorf &nbsp;&middot;&nbsp; Studio DuMont Köln (mit Günter Wallraff) &nbsp;&middot;&nbsp;
+        Rudolf-Scharpf-Galerie Ludwigshafen &nbsp;&middot;&nbsp; Universität Kaiserslautern &nbsp;&middot;&nbsp;
+        Galerie Alte Feuerwache Mannheim &nbsp;&middot;&nbsp; photokina 1992, 1994, 1996, 1998
+      </p>
+    </div>
+  </div>
+
+  <!-- ── PUBLIKATIONEN ──────────────────────── -->
+  <div class="section" id="publikationen">
+    <p class="section-label">Publikationen</p>
+
+    <div class="pub"><span class="pub-title">„Auschwitz heute"</span><br>
+      Hentrich &amp; Hentrich Verlag, Berlin, 2015</div>
+
+    <div class="pub"><span class="pub-title">„Auschwitz heute – dzisiaj – today"</span><br>
+      bpb, Bundeszentrale für politische Bildung, Bonn, 2015</div>
+
+    <div class="pub"><span class="pub-title">„Verdun. 100 Jahre danach. Eine deutsch-französische Spurensuche"</span><br>
+      Martin Blume &amp; Emmanuel Berry — Hentrich &amp; Hentrich Verlag, Berlin, 2014</div>
+
+    <div class="pub"><span class="pub-title">„Le ciel est bleu"</span><br>
+      Lindemanns Verlag, Stuttgart, 2011</div>
+
+    <div class="pub"><span class="pub-title">„Der Dom zu Mainz – Bilder einer Kathedrale"</span><br>
+      Martin Blume &amp; Bernd Radtke — Verlag der Universitätsdruckerei H. Schmidt, Mainz, 2009</div>
+
+    <div class="pub"><span class="pub-title">„Vestiges"</span><br>
+      Martin Blume &amp; Douglas Busch — Lindemanns Verlag, Stuttgart, 2005</div>
+
+    <div class="pub"><span class="pub-title">„Photographische Novellen"</span><br>
+      Lindemanns Verlag, Stuttgart, 2000</div>
+
+    <div class="pub"><span class="pub-title">„Die Veränderung der Wirklichkeit schafft Wahrheit"</span><br>
+      Edition Quadrat, Mannheim, 1997</div>
+
+    <div class="pub"><span class="pub-title">„Feinste Photographien"</span><br>
+      Edition Quadrat, Mannheim, 1993</div>
+  </div>
+
+  <!-- ── SAMMLUNGEN ─────────────────────────── -->
+  <div class="section" id="sammlungen">
+    <p class="section-label">Werke in öffentlichen Sammlungen</p>
+    <ul class="collections-list">
+      <li>Deutsche Bank AG, Frankfurt am Main</li>
+      <li>Los Angeles County Museum of Art</li>
+      <li>Faulconer Gallery, Grinnell, Iowa</li>
+      <li>Landesbank Rheinland-Pfalz, Mainz</li>
+      <li>Kreismuseum Torgau-Oschatz, Sachsen</li>
+      <li>Dorint Kongress-Hotel, Karlsruhe</li>
+      <li>Lotte Reimers Stiftung, Deidesheim</li>
+      <li>Ministerium für Bildung und Kultur, RLP</li>
+      <li>Landessammlung Fotografie RLP, Koblenz</li>
+      <li>Sparkasse Südliche Weinstraße, Landau</li>
+      <li>Sammlung der Stadt Hannover</li>
+      <li>Sammlung der Stadt Annweiler am Trifels</li>
+    </ul>
+    <p style="margin-top:1.5em; color:var(--text-dim); font-size:13px;">sowie zahlreiche Privatsammlungen</p>
+  </div>
+
+  <!-- ── GALERIE ───────────────────────────── -->
+  <div class="section" id="galerie">
+    <p class="section-label">Galerie</p>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="real-photography/images/night_views.jpg"
+             alt="Vestiges — Martin Blume &amp; Douglas I. Busch, Burg Trifels, 2005">
+      </div>
+      <div class="gallery-item">
+        <img src="fineart-ultralarge/images/mbtitle.jpg"
+             alt="Three Windows — Special Edition I-2005">
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-item-placeholder">
+          <span class="ph-title">Auschwitz heute</span>
+          <span class="ph-year">2015</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-item-placeholder">
+          <span class="ph-title">Verdun — 100 Jahre danach</span>
+          <span class="ph-year">2014</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-item-placeholder">
+          <span class="ph-title">Der Dom zu Mainz</span>
+          <span class="ph-year">2008 – 2009</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-item-placeholder">
+          <span class="ph-title">Série Populaire</span>
+          <span class="ph-year">seit 1989</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-item-placeholder">
+          <span class="ph-title">Psychographie</span>
+          <span class="ph-year">1987 – 1988</span>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-item-placeholder">
+          <span class="ph-title">Feinste Photographien</span>
+          <span class="ph-year">1993</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="gallery-more">
+      <a href="gallery.html">Vollständige Galerie &rarr;</a>
+    </p>
+  </div>
+
+  <!-- ── KONTAKT ──────────────────────────── -->
+  <div class="section" id="kontakt">
+    <p class="section-label">Kontakt</p>
+
+    <form class="contact-form" style="margin-bottom:3em;"
+          action="https://api.web3forms.com/submit"
+          method="POST">
+
+      <!-- Web3Forms access key — replace with your key from web3forms.com -->
+      <input type="hidden" name="access_key" value="c6fb22a2-6822-4c90-9e8a-bc08a3cf68ec">
+      <input type="hidden" name="subject" value="Nachricht über martinblume.de">
+      <input type="hidden" name="redirect" value="https://martinblume.de/#kontakt">
+      <!-- Honeypot spam protection -->
+      <input type="checkbox" name="botcheck" style="display:none">
+
+      <div class="form-row">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required autocomplete="name">
+      </div>
+
+      <div class="form-row">
+        <label for="email">E-Mail</label>
+        <input type="email" id="email" name="email" required autocomplete="email">
+      </div>
+
+      <div class="form-row">
+        <label for="message">Nachricht &middot; Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+
+      <button type="submit" class="form-submit">Senden &middot; Envoyer</button>
+    </form>
+
+    <p class="form-mailto">
+      Oder direkt per E-Mail &nbsp;&middot;&nbsp; Or directly by email:<br>
+      <a href="mailto:info@feinste-photographien.com">info@feinste-photographien.com</a>
+    </p>
+
+    <p class="section-label" style="margin-top:3em;">Erinnerungen teilen &middot; Partager un souvenir</p>
+    <p class="condolence-note">
+      Wenn Sie Martin Blume persönlich kannten oder sein Werk Sie berührt hat,
+      freuen wir uns über Ihre Worte.
+    </p>
+
+    <form class="contact-form"
+          action="https://api.web3forms.com/submit"
+          method="POST">
+      <input type="hidden" name="access_key" value="c6fb22a2-6822-4c90-9e8a-bc08a3cf68ec">
+      <input type="hidden" name="subject" value="Erinnerung — martinblume.de">
+      <input type="hidden" name="redirect" value="https://martinblume.de/#kontakt">
+      <input type="checkbox" name="botcheck" style="display:none">
+
+      <div class="form-row">
+        <label for="mem-name">Name</label>
+        <input type="text" id="mem-name" name="name" required autocomplete="name">
+      </div>
+      <div class="form-row">
+        <label for="mem-msg">Erinnerung &middot; Souvenir</label>
+        <textarea id="mem-msg" name="message" required style="height:160px;"></textarea>
+      </div>
+      <button type="submit" class="form-submit">Senden &middot; Envoyer</button>
+    </form>
+  </div>
+
+</div><!-- /page -->
+
+<!-- ── ARCHIV ─────────────────────────────── -->
+<div id="archiv" style="border-top: 1px solid #161616; margin-top: 0; background: #090909;">
+  <div class="page">
+
+    <div class="archive-header">
+      <p class="archive-label">Archiv &middot; Archive</p>
+      <p class="archive-sub">Frühere Webseiten &middot; Sites antérieurs &middot; Earlier websites</p>
+    </div>
+
+    <div class="archive-grid">
+
+      <a href="feinste-photographien/index.html" class="archive-entry">
+        <img src="feinste-photographien/images/feph.png" alt="Feinste Photographien">
+        <span class="archive-entry-title">Feinste Photographien</span>
+        <span class="archive-entry-years">2014 – 2015</span>
+      </a>
+
+      <a href="academia-palatina/index.html" class="archive-entry">
+        <img src="academia-palatina/images/kphed.png" alt="Academia Palatina">
+        <span class="archive-entry-title">Academia Palatina</span>
+        <span class="archive-entry-years">1998 – 2015</span>
+      </a>
+
+      <a href="real-photography/index.html" class="archive-entry">
+        <img src="images/real_title.jpg" alt="Real Photography">
+        <span class="archive-entry-title">Real Photography</span>
+        <span class="archive-entry-years">2004 – 2009</span>
+      </a>
+
+      <a href="fineart-ultralarge/index.html" class="archive-entry">
+        <img src="fineart-ultralarge/images/mbtitle.jpg" alt="fineart-ultralarge.com">
+        <span class="archive-entry-title">fineart-ultralarge.com</span>
+        <span class="archive-entry-years">2004 – 2007</span>
+      </a>
+
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>&copy; Martin Blume &nbsp;&middot;&nbsp; Alle Rechte vorbehalten</p>
+</footer>
+
+</body>
+</html>
