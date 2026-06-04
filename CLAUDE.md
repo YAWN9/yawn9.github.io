@@ -8,24 +8,91 @@ A memorial site for photographer Martin Blume (* 23. November 1956 † 10. Mai 2
 
 ---
 
+## Current state (as of 2026-06-05)
+
+**LIVE** at https://yawn9.github.io — GitHub repo: YAWN9/yawn9.github.io
+
+- Web3Forms access key is set: `c6fb22a2-6822-4c90-9e8a-bc08a3cf68ec` (index.html lines ~750 and ~788)
+- Domain references throughout the project use `yawn9.github.io` (not martinblume.de)
+- robots.txt is currently set to `Disallow: /` — intentionally blocking all indexing until ready to launch
+- All 40 pages across all four sub-sites have "← Martin Blume" back-navigation to `../index.html`
+- Language switcher bugs fixed: feinste-photographien and academia-palatina index pages route correctly
+- `friends.html` is committed — password-protected page (see details below)
+- `aaronblume_site/index.html` exists locally — draft personal site for Aaron Blume, NOT committed, NOT deployed
+
+---
+
+## Remaining TODO (priority order)
+
+1. **Fix sitemap.xml** — 9 pages are missing:
+   - `feinste-photographien/publications.html`
+   - `feinste-photographien/references.html`
+   - `academia-palatina/ateliers-fr.html`
+   - `academia-palatina/actualites-fr.html`
+   - `academia-palatina/contact-fr.html`
+   - `academia-palatina/mentions-legales-fr.html`
+   - `fineart-ultralarge/impressum.html`
+   - `fineart-ultralarge/projekte.html`
+   - `fineart-ultralarge/galerie.html`
+
+2. **Update robots.txt** when ready to launch:
+   - Flip `Disallow: /` to `Allow: /`
+   - Add `Disallow: /friends.html`
+   - Add `Disallow: /aaronblume_site/`
+
+3. **Fix 404.html** — currently German-only; add an English line
+
+4. **Replace missing images** — only possible with original files from family (all Wayback Machine sources are corrupted HTML, not recoverable):
+   - `feinste-photographien/images/philomb.jpg` — portrait of Martin Blume (Philosophie page + memorial hero)
+   - `feinste-photographien/images/DLA_Mit_Rand.jpg` — "Das Letzte Abendmahl, 2009"
+   - `academia-palatina/images/workhead.jpg` — workshop photo
+   - `real-photography/images/schirm.jpg`, `martin_foto.gif`, `martin_foto.jpg` — corrupted
+   - `fineart-ultralarge/images/` — gallery/01-04.jpg, ingelheim/blume.jpg, ingelheim/ringelheim.jpg, sedi04_photo.jpg, sedi04_title.jpg, logo.gif — all corrupted
+
+5. **Extend fineart-ultralarge/vita.html** — currently stops at 2000; missing 2000–2007 exhibitions
+
+6. **Fill gallery.html** — 84% placeholder (16/19 items have no photos); placeholders cover: Auschwitz heute, Verdun, Der Dom zu Mainz, Série Populaire, Psychographie, Feinste Photographien. Each placeholder is a `<div class="photo-placeholder">` — replace with `<div class="photo-item"><img src="..."></div>` when images are available.
+
+7. **Update contact email in index.html** — currently `info@feinste-photographien.com`
+
+8. **Deploy aaronblume_site/** — draft minimal personal site for Aaron Blume at `aaronblu.me`; commit and deploy when ready
+
+---
+
+## friends.html — password-protected page
+
+Committed to the repo. Intended for friends of Alissa Gans (@alissas.archive).
+
+- `<meta name="robots" content="noindex, nofollow">` — not indexed
+- Two-level password protection using SHA-256 hashed keys stored in the file
+- 3-attempt lockout with 30-minute timeout
+- **Level 1:** Shows Instagram profile card + @alissas.archive embed with 3 real posts (DVWLXCOjBzH, DU_NgxEDNj2, DO24N6bDGfw)
+- **Level 2:** Shows private folder links (4 placeholder slots)
+
+---
+
 ## File structure
 
 ```
 /
 ├── index.html              ← Main memorial page (start here)
-├── gallery.html            ← Photo gallery with lightbox
-├── 404.html                ← Custom not-found page
-├── sitemap.xml
-├── robots.txt
+├── gallery.html            ← Photo gallery with lightbox (84% placeholder)
+├── friends.html            ← Password-protected page for Alissa's friends
+├── 404.html                ← Custom not-found page (German only — needs English line)
+├── sitemap.xml             ← Missing 9 pages (see TODO above)
+├── robots.txt              ← Currently Disallow: / (intentional — pre-launch)
 ├── profile.gif             ← Silhouette logo — used as favicon + gallery placeholder
 ├── CLAUDE.md               ← This file
 │
 ├── images/
 │   └── real_title.jpg      ← real-photography.de header (used on landing archive card)
 │
+├── aaronblume_site/        ← LOCAL ONLY — not committed, not deployed
+│   └── index.html          ← Draft minimal personal site for Aaron Blume (aaronblu.me)
+│
 ├── feinste-photographien/  ← 2014–2015 site — NEWEST, used as memorial baseline
 │   ├── style.css
-│   ├── index.html          ← Language selector (DE | FR)
+│   ├── index.html          ← Language selector (DE | FR) — fixed to route FR → philosophie-fr.html
 │   ├── philosophie.html / philosophie-fr.html
 │   ├── projekte.html / projets.html
 │   ├── ausstellungen.html / expositions.html
@@ -35,12 +102,12 @@ A memorial site for photographer Martin Blume (* 23. November 1956 † 10. Mai 2
 │   ├── kontakt.html / contact.html
 │   └── images/
 │       ├── feph.png              ✓ valid (header image)
-│       ├── philomb.jpg           ✗ MISSING — portrait photo for Philosophie page
-│       └── DLA_Mit_Rand.jpg      ✗ MISSING — "Das Letzte Abendmahl, 2009"
+│       ├── philomb.jpg           ✗ CORRUPTED — not in Wayback Machine; replace with real file
+│       └── DLA_Mit_Rand.jpg      ✗ CORRUPTED — not in Wayback Machine; replace with real file
 │
 ├── academia-palatina/      ← 1998–2015 site — workshops & photography school
 │   ├── style.css
-│   ├── index.html          ← Language selector (DE | FR)
+│   ├── index.html          ← Language selector (DE | FR) — fixed to route FR → photographie-fr.html
 │   ├── photographie-de.html / photographie-fr.html
 │   ├── workshops-de.html / ateliers-fr.html
 │   ├── aktuelles-de.html / actualites-fr.html
@@ -48,7 +115,7 @@ A memorial site for photographer Martin Blume (* 23. November 1956 † 10. Mai 2
 │   ├── impressum-de.html / mentions-legales-fr.html
 │   └── images/
 │       ├── kphed.png             ✓ valid (header image)
-│       └── workhead.jpg          ✗ MISSING — workshop photo
+│       └── workhead.jpg          ✗ CORRUPTED — not in Wayback Machine; replace with real file
 │
 ├── real-photography/       ← 2004–2009 site — English language
 │   ├── style.css
@@ -61,7 +128,10 @@ A memorial site for photographer Martin Blume (* 23. November 1956 † 10. Mai 2
 │   ├── contact.html
 │   └── images/
 │       ├── real_title.jpg        ✓ valid (header image)
-│       └── night_views.jpg       ✓ valid — "Vestiges", Burg Trifels 2005
+│       ├── night_views.jpg       ✓ valid — "Vestiges", Burg Trifels 2005
+│       ├── schirm.jpg            ✗ CORRUPTED — not in Wayback Machine
+│       ├── martin_foto.gif       ✗ CORRUPTED — not in Wayback Machine
+│       └── martin_foto.jpg       ✗ CORRUPTED — not in Wayback Machine
 │
 └── fineart-ultralarge/     ← 2004–2007 site — OLDEST, richest early vita
     ├── style.css
@@ -70,12 +140,17 @@ A memorial site for photographer Martin Blume (* 23. November 1956 † 10. Mai 2
     ├── galerie.html
     ├── sonderditionen.html  ← Quarterly special editions (DE/EN/FR)
     ├── projekte.html        ← Ingelheim 2003, Busch & Blume 1999, Grenze im Kopf 1999
-    ├── vita.html            ← MOST COMPLETE vita — exhibitions back to 1991, Vestiges project
+    ├── vita.html            ← MOST COMPLETE vita — exhibitions back to 1991, Vestiges project; stops at 2000
     ├── kontakt.html
     ├── impressum.html
     └── images/
         ├── mbtitle.jpg           ✓ valid — "Three Windows", Special Edition I-2005
-        └── (others failed to download from archive)
+        ├── gallery/01-04.jpg     ✗ CORRUPTED — not in Wayback Machine
+        ├── ingelheim/blume.jpg   ✗ CORRUPTED — not in Wayback Machine
+        ├── ingelheim/ringelheim.jpg ✗ CORRUPTED — not in Wayback Machine
+        ├── sedi04_photo.jpg      ✗ CORRUPTED — not in Wayback Machine
+        ├── sedi04_title.jpg      ✗ CORRUPTED — not in Wayback Machine
+        └── logo.gif              ✗ CORRUPTED — not in Wayback Machine
 ```
 
 ---
@@ -98,60 +173,23 @@ The memorial `index.html` has its own inline `<style>` block. Each archived site
 
 ---
 
-## Before going live — checklist
+## Deployment — already live
 
-### 1. Web3Forms access key (REQUIRED)
-Go to [web3forms.com](https://web3forms.com), create a free account (250 submissions/month), and replace both occurrences of `YOUR_WEB3FORMS_ACCESS_KEY` in `index.html`:
-- Line ~440 — contact form
-- Line ~475 — condolences/memories form
+The site is deployed on GitHub Pages at https://yawn9.github.io via repo YAWN9/yawn9.github.io. No custom domain is configured yet.
 
-### 2. Update the domain placeholder (REQUIRED if using a custom domain)
-Replace `martinblume.de` with the actual domain in:
-- `index.html` — OG tag `og:url`, `og:image`, `twitter:image`, and both form `redirect` values
-- `sitemap.xml` — all `<loc>` entries
-- `robots.txt` — the `Sitemap:` line
-
-If staying on `yourusername.github.io/repo`, use that URL instead.
-
-### 3. Missing portrait photo (HIGH IMPACT)
-`feinste-photographien/images/philomb.jpg` — the portrait of Martin Blume shown on the Philosophie page and the memorial hero. The file exists but may be broken (downloaded as HTML from the archive). Replace with the actual photo if you have it. The memorial page uses `onerror` to hide it silently if broken.
-
-### 4. Missing content images
-Add these if you have them:
-- `feinste-photographien/images/DLA_Mit_Rand.jpg` — "Das Letzte Abendmahl, 2009"
-- `academia-palatina/images/workhead.jpg` — workshop photo
-- Any actual gallery images → add to `gallery.html` replacing the placeholder `<div>` blocks
-
-### 5. Gallery placeholders
-`gallery.html` has placeholder slots for: Auschwitz heute, Verdun, Der Dom zu Mainz, Série Populaire, Psychographie, Feinste Photographien. Each placeholder is a `<div class="photo-placeholder">` — replace with `<div class="photo-item"><img src="..."></div>` when images are available.
-
-### 6. Verify death location
-Currently set to `10. Mai 2015, Landau i.d. Pfalz`. Confirm this is correct in `index.html` hero section.
-
----
-
-## How to deploy on GitHub Pages
-
-1. Create a GitHub account at github.com if you don't have one
-2. Create a new repository — name it `martinblume` (or the domain name)
-3. Upload all files (drag & drop in the GitHub web UI, or use Git)
-4. Go to the repository **Settings → Pages**
-5. Source: **Deploy from a branch** → branch `main`, folder `/ (root)`
-6. Save — the site will be live at `https://yourusername.github.io/martinblume/`
-
-### With a custom domain (e.g. martinblume.de)
-1. Buy the domain at any registrar (Hetzner, INWX, Namecheap — ~€10–15/year)
-2. In the GitHub repo Settings → Pages → Custom domain: enter `martinblume.de`
-3. At the registrar, add these DNS records:
+### If adding a custom domain later (e.g. martinblume.de)
+1. In the GitHub repo Settings → Pages → Custom domain: enter the domain
+2. At the registrar, add these DNS records:
    ```
    A     @    185.199.108.153
    A     @    185.199.109.153
    A     @    185.199.110.153
    A     @    185.199.111.153
-   CNAME www  yourusername.github.io
+   CNAME www  yawn9.github.io
    ```
-4. Wait ~1 hour for DNS to propagate
-5. Enable **Enforce HTTPS** in GitHub Pages settings
+3. Wait ~1 hour for DNS to propagate
+4. Enable **Enforce HTTPS** in GitHub Pages settings
+5. Update domain references in `index.html` (OG tags, form redirects), `sitemap.xml`, and `robots.txt`
 
 ---
 
@@ -162,11 +200,17 @@ Tell Claude:
 
 Key things a future Claude session should know:
 - The memorial `index.html` is the primary page — everything else is archive
+- The site is LIVE at https://yawn9.github.io — repo is YAWN9/yawn9.github.io
+- Web3Forms key `c6fb22a2-6822-4c90-9e8a-bc08a3cf68ec` is already set in index.html
+- robots.txt blocks all indexing intentionally (`Disallow: /`) — flip when ready to launch
 - The French pages for feinste-photographien (other than philosophie-fr.html) and academia-palatina were NOT in the Wayback Machine archive; they were reconstructed by translation
-- `fineart-ultralarge/vita.html` has the richest biographical content — early exhibitions back to 1991, photokina appearances, Günter Wallraff collaboration, Vestiges project description
+- `fineart-ultralarge/vita.html` has the richest biographical content — early exhibitions back to 1991, photokina appearances, Günter Wallraff collaboration, Vestiges project description — but stops at 2000
 - The real-photography.de site is in English; the others are German + French
 - The profile.gif (silhouette of photographer with umbrella) is the site logo
-- Web3Forms is used for contact (×1) and condolences (×1) — both need the same access key
+- Web3Forms is used for contact (×1) and condolences (×1) — same key for both
+- All corrupted image files came from the Wayback Machine as HTML; they cannot be recovered from the archive — only original family files can replace them
+- `friends.html` is a two-level password-protected page for Alissa Gans's Instagram followers; committed but noindexed
+- `aaronblume_site/` is a local-only draft for Aaron Blume's personal site (aaronblu.me) — not committed
 
 ---
 
