@@ -255,6 +255,18 @@
       justify-content: center;
     }
 
+    .ig-embed-identity {
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      flex: 1;
+      min-width: 0;
+      text-decoration: none;
+      color: inherit;
+      transition: opacity 0.18s;
+    }
+    .ig-embed-identity:hover { opacity: 0.78; }
+
     .ig-embed-info { flex: 1; min-width: 0; }
 
     .ig-embed-username {
@@ -296,15 +308,106 @@
       line-height: 1.6;
     }
 
-    /* Embedded posts */
+    /* Embedded posts — small dark grid tiles, like Instagram's own
+       profile grid, but fully in-palette: a gold aperture glyph stands
+       in for the photo (Instagram's embeds can't be cropped to just the
+       image — they always carry their own white header chrome). Clicking
+       a tile opens the real post on Instagram. */
     .ig-posts {
-      padding: 1rem 1.2rem 0.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      padding: 2px;
     }
-    .ig-posts .instagram-media { margin: 0 !important; }
+    .ig-post-tile {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(137, 112, 82, 0.16), transparent 65%),
+        linear-gradient(150deg, #18150f, #0a0908);
+      text-decoration: none;
+    }
+    .ig-post-glyph {
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .ig-post-tile:hover .ig-post-glyph {
+      opacity: 0.45;
+      transform: scale(0.9);
+    }
+    .ig-post-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0.5rem;
+      background: rgba(13, 11, 9, 0);
+      transition: background 0.25s;
+    }
+    .ig-post-overlay span {
+      color: var(--gold);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.56rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .ig-post-tile:hover .ig-post-overlay { background: rgba(13, 11, 9, 0.7); }
+    .ig-post-tile:hover .ig-post-overlay span { opacity: 1; transform: translateY(0); }
+
+    /* ── In-page lightbox: opens the real Instagram widget on click ── */
+    .ig-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.1rem;
+    }
+    .ig-lightbox-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(8, 7, 6, 0.88);
+    }
+    .ig-lightbox-panel {
+      position: relative;
+      width: 100%;
+      max-width: 540px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #0d0b09;
+      border: 1px solid var(--rule);
+      padding: 2.6rem 0 0.5rem;
+    }
+    .ig-lightbox-close {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.6rem;
+      width: 2.1rem;
+      height: 2.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1px solid var(--gold-dim);
+      color: var(--gold);
+      font-size: 1.2rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .ig-lightbox-close:hover { border-color: var(--gold); color: var(--cream); }
+    .ig-lightbox-body { display: flex; justify-content: center; }
+    .ig-lightbox-body .instagram-media { margin: 0 !important; }
+    template { display: none !important; }
 
     .ig-embed-footer {
       padding: 0.9rem 1.2rem;
@@ -561,28 +664,36 @@
     <div class="ig-embed">
 
       <div class="ig-embed-header">
-        <!-- Avatar with story gradient ring -->
-        <div class="ig-story-ring" aria-hidden="true">
-          <div class="ig-story-inner">
-            <svg width="28" height="28" viewBox="0 0 52 52" fill="none">
-              <circle cx="26" cy="26" r="23" stroke="#897052" stroke-width="0.7"/>
-              <circle cx="26" cy="26" r="14" stroke="#897052" stroke-width="0.6" stroke-dasharray="2 3"/>
-              <circle cx="26" cy="26" r="8"  stroke="#897052" stroke-width="0.7"/>
-              <circle cx="26" cy="26" r="3.5" fill="#897052" opacity="0.3"/>
-            </svg>
+        <a
+          href="https://www.instagram.com/alissas.archive/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ig-embed-identity"
+        >
+          <!-- Avatar with story gradient ring -->
+          <div class="ig-story-ring" aria-hidden="true">
+            <div class="ig-story-inner">
+              <svg width="28" height="28" viewBox="0 0 52 52" fill="none">
+                <circle cx="26" cy="26" r="23" stroke="#897052" stroke-width="0.7"/>
+                <circle cx="26" cy="26" r="14" stroke="#897052" stroke-width="0.6" stroke-dasharray="2 3"/>
+                <circle cx="26" cy="26" r="8"  stroke="#897052" stroke-width="0.7"/>
+                <circle cx="26" cy="26" r="3.5" fill="#897052" opacity="0.3"/>
+              </svg>
+            </div>
           </div>
-        </div>
 
-        <div class="ig-embed-info">
-          <p class="ig-embed-username">alissas.archive</p>
-          <p class="ig-embed-displayname">alissa's archive</p>
-          <a
-            href="https://www.instagram.com/alissas.archive/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="ig-embed-follow"
-          >Folgen</a>
-        </div>
+          <div class="ig-embed-info">
+            <p class="ig-embed-username">alissas.archive</p>
+            <p class="ig-embed-displayname">alissa's archive</p>
+          </div>
+        </a>
+
+        <a
+          href="https://www.instagram.com/alissas.archive/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ig-embed-follow"
+        >Folgen</a>
       </div>
 
       <hr class="ig-embed-sep">
@@ -592,9 +703,61 @@
 
       <hr class="ig-embed-sep">
 
-      <!-- Instagram post embeds -->
+      <!-- Instagram post grid — small dark square tiles (like IG's own
+           profile grid). Gold aperture glyph stands in for the photo;
+           swap the <svg class="ig-post-glyph"> for an <img class="ig-post-photo">
+           once a real downloaded preview image is available per post.
+           Clicking a tile opens the real Instagram widget in the lightbox below. -->
       <div class="ig-posts">
 
+        <button class="ig-post-tile" type="button" data-post="DVWLXCOjBzH" aria-haspopup="dialog" aria-label="Instagram-Beitrag von @alissas.archive ansehen">
+          <svg class="ig-post-glyph" width="34" height="34" viewBox="0 0 52 52" fill="none" aria-hidden="true">
+            <circle cx="26" cy="26" r="23" stroke="#897052" stroke-width="0.7" opacity="0.4"/>
+            <circle cx="26" cy="26" r="14" stroke="#897052" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.4"/>
+            <circle cx="26" cy="26" r="8"  stroke="#897052" stroke-width="0.7" opacity="0.4"/>
+            <circle cx="26" cy="26" r="3.5" fill="#897052" opacity="0.25"/>
+          </svg>
+          <span class="ig-post-overlay"><span>Beitrag ansehen &rarr;</span></span>
+        </button>
+
+        <button class="ig-post-tile" type="button" data-post="DU_NgxEDNj2" aria-haspopup="dialog" aria-label="Instagram-Beitrag von @alissas.archive ansehen">
+          <svg class="ig-post-glyph" width="34" height="34" viewBox="0 0 52 52" fill="none" aria-hidden="true">
+            <circle cx="26" cy="26" r="23" stroke="#897052" stroke-width="0.7" opacity="0.4"/>
+            <circle cx="26" cy="26" r="14" stroke="#897052" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.4"/>
+            <circle cx="26" cy="26" r="8"  stroke="#897052" stroke-width="0.7" opacity="0.4"/>
+            <circle cx="26" cy="26" r="3.5" fill="#897052" opacity="0.25"/>
+          </svg>
+          <span class="ig-post-overlay"><span>Beitrag ansehen &rarr;</span></span>
+        </button>
+
+        <button class="ig-post-tile" type="button" data-post="DO24N6bDGfw" aria-haspopup="dialog" aria-label="Instagram-Beitrag von @alissas.archive ansehen">
+          <svg class="ig-post-glyph" width="34" height="34" viewBox="0 0 52 52" fill="none" aria-hidden="true">
+            <circle cx="26" cy="26" r="23" stroke="#897052" stroke-width="0.7" opacity="0.4"/>
+            <circle cx="26" cy="26" r="14" stroke="#897052" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.4"/>
+            <circle cx="26" cy="26" r="8"  stroke="#897052" stroke-width="0.7" opacity="0.4"/>
+            <circle cx="26" cy="26" r="3.5" fill="#897052" opacity="0.25"/>
+          </svg>
+          <span class="ig-post-overlay"><span>Beitrag ansehen &rarr;</span></span>
+        </button>
+
+      </div>
+
+      <!-- Lightbox — renders the official Instagram widget for a closer look.
+           The blockquote markup lives in inert <template>s and gets cloned
+           into #ig-lightbox-body fresh on each open: embed.js measures and
+           converts blockquotes at the moment they're processed, so a copy
+           that already sat hidden (display:none) on page load would be
+           converted at zero height and never recover. A freshly-inserted,
+           visible copy avoids that. -->
+      <div id="ig-lightbox" class="ig-lightbox hidden" aria-hidden="true">
+        <div class="ig-lightbox-backdrop" data-ig-close></div>
+        <div class="ig-lightbox-panel" role="dialog" aria-modal="true" aria-label="Instagram-Beitrag">
+          <button class="ig-lightbox-close" type="button" data-ig-close aria-label="Schließen">&times;</button>
+          <div class="ig-lightbox-body" id="ig-lightbox-body"></div>
+        </div>
+      </div>
+
+      <template id="ig-tpl-DVWLXCOjBzH">
         <blockquote class="instagram-media" data-instgrm-captioned
           data-instgrm-permalink="https://www.instagram.com/p/DVWLXCOjBzH/?utm_source=ig_embed&amp;utm_campaign=loading"
           data-instgrm-version="14"
@@ -604,7 +767,9 @@
             <p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center;text-overflow:ellipsis;white-space:nowrap;"><a href="https://www.instagram.com/p/DVWLXCOjBzH/?utm_source=ig_embed&amp;utm_campaign=loading" style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:17px;text-decoration:none;" target="_blank">Ein Beitrag geteilt von Alissa Gans (@alissas.archive)</a></p>
           </div>
         </blockquote>
+      </template>
 
+      <template id="ig-tpl-DU_NgxEDNj2">
         <blockquote class="instagram-media" data-instgrm-captioned
           data-instgrm-permalink="https://www.instagram.com/p/DU_NgxEDNj2/?utm_source=ig_embed&amp;utm_campaign=loading"
           data-instgrm-version="14"
@@ -614,7 +779,9 @@
             <p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center;text-overflow:ellipsis;white-space:nowrap;"><a href="https://www.instagram.com/p/DU_NgxEDNj2/?utm_source=ig_embed&amp;utm_campaign=loading" style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:17px;text-decoration:none;" target="_blank">Ein Beitrag geteilt von Alissa Gans (@alissas.archive)</a></p>
           </div>
         </blockquote>
+      </template>
 
+      <template id="ig-tpl-DO24N6bDGfw">
         <blockquote class="instagram-media" data-instgrm-captioned
           data-instgrm-permalink="https://www.instagram.com/p/DO24N6bDGfw/?utm_source=ig_embed&amp;utm_campaign=loading"
           data-instgrm-version="14"
@@ -624,8 +791,7 @@
             <p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;line-height:17px;margin-bottom:0;margin-top:8px;overflow:hidden;padding:8px 0 7px;text-align:center;text-overflow:ellipsis;white-space:nowrap;"><a href="https://www.instagram.com/p/DO24N6bDGfw/?utm_source=ig_embed&amp;utm_campaign=loading" style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;font-style:normal;font-weight:normal;line-height:17px;text-decoration:none;" target="_blank">Ein Beitrag geteilt von Alissa Gans (@alissas.archive)</a></p>
           </div>
         </blockquote>
-
-      </div>
+      </template>
 
       <div class="ig-embed-footer">
         <a
@@ -886,6 +1052,33 @@
   /* ── Placeholder cards: prevent # navigation ── */
   document.querySelectorAll('[data-placeholder]').forEach(a => {
     a.addEventListener('click', e => e.preventDefault());
+  });
+
+  /* ── Instagram lightbox: tile click opens the real widget in-page ── */
+  const igLightbox = $('ig-lightbox');
+
+  function openIgLightbox(postId) {
+    const body = $('ig-lightbox-body');
+    const tpl  = $(`ig-tpl-${postId}`);
+    body.innerHTML = '';
+    if (tpl) body.appendChild(tpl.content.cloneNode(true));
+    show(igLightbox);
+    igLightbox.setAttribute('aria-hidden', 'false');
+    if (window.instgrm) window.instgrm.Embeds.process();
+  }
+  function closeIgLightbox() {
+    hide(igLightbox);
+    igLightbox.setAttribute('aria-hidden', 'true');
+    $('ig-lightbox-body').innerHTML = '';
+  }
+  document.querySelectorAll('.ig-post-tile').forEach(tile => {
+    tile.addEventListener('click', () => openIgLightbox(tile.dataset.post));
+  });
+  igLightbox.querySelectorAll('[data-ig-close]').forEach(el => {
+    el.addEventListener('click', closeIgLightbox);
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !igLightbox.classList.contains('hidden')) closeIgLightbox();
   });
 
   /* ── Boot ── */
