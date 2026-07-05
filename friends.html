@@ -507,6 +507,73 @@
       padding: 1.5rem 0;
     }
 
+    /* ── Contact form ── */
+    .contact-section {
+      max-width: 660px;
+      margin: 0 auto;
+      padding: 0 2rem 3rem;
+    }
+    .contact-eyebrow {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 0.4rem;
+    }
+    .contact-title {
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+    .cf-row {
+      margin-bottom: 1.1rem;
+    }
+    .cf-row label {
+      display: block;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      margin-bottom: 6px;
+    }
+    .cf-row input,
+    .cf-row textarea {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--rule);
+      color: var(--cream);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 14px;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+    .cf-row input:focus,
+    .cf-row textarea:focus { border-color: var(--gold); }
+    .cf-row textarea { height: 130px; resize: vertical; }
+    .cf-submit {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 11px 28px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin-top: 0.5rem;
+    }
+    .cf-submit:hover {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
     /* ── Utils ── */
     .hidden { display: none !important; }
 
@@ -705,6 +772,36 @@
     </div>
   </div>
 
+  <div class="contact-section">
+    <p class="contact-eyebrow">Kontakt / Feedback</p>
+    <h2 class="contact-title">Nachricht hinterlassen</h2>
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="c6fb22a2-6822-4c90-9e8a-bc08a3cf68ec">
+      <input type="hidden" name="subject" id="cf-subject" value="Nachricht über alissa's archive">
+      <input type="hidden" name="redirect" value="https://yawn9.github.io/friends.html">
+      <input type="hidden" name="persona" id="cf-persona">
+      <input type="checkbox" name="botcheck" style="display:none">
+
+      <div class="cf-row">
+        <label for="cf-name">Name</label>
+        <input type="text" id="cf-name" name="name" required autocomplete="name">
+      </div>
+      <div class="cf-row">
+        <label for="cf-email">E-Mail <span style="font-style:italic;text-transform:none;letter-spacing:0;">(optional)</span></label>
+        <input type="email" id="cf-email" name="email" autocomplete="email">
+      </div>
+      <div class="cf-row">
+        <label for="cf-message">Nachricht</label>
+        <textarea id="cf-message" name="message" required></textarea>
+      </div>
+      <button type="submit" class="cf-submit">Senden</button>
+    </form>
+  </div>
+
+  <div style="max-width:660px; margin:0 auto; padding:0 2rem;">
+    <hr class="divider">
+  </div>
+
   <!-- ── Archive — persona sections (revealed by JS after login) ── -->
   <div class="archive-section">
 
@@ -733,6 +830,7 @@
 
   </div>
 
+
 </div><!-- #page -->
 
 <noscript>
@@ -746,6 +844,8 @@
      IMPORTANT: the index here must match the persona-N section each password unlocks,
      AND every data-enc in persona-N must be encrypted with HASHES[N]'s password.
      Swapping passwords without re-encrypting the links will break decryption silently. */
+  const PERSONA_NAMES = ['Berge', 'Standesamt'];
+
   const HASHES = [
     'ddbe4974ab8ef04f44272369cd77edcec08ddd575bef739a45d4e37baa510aa3', // → persona 0 (no links yet)
     '711300b864bc7963eb40b2939eadb36ff486f92729c849cb287338f188f7f9de'  // → persona 1 (iCloud album)
@@ -915,6 +1015,13 @@
   }
 
   $('pw').addEventListener('keydown', e => { if (e.key === 'Enter') tryPw(); });
+
+  /* Stamp the active persona into the contact form before submission */
+  document.querySelector('.contact-section form').addEventListener('submit', () => {
+    const p = getPersona();
+    $('cf-persona').value  = PERSONA_NAMES[p] || `persona-${p}`;
+    $('cf-subject').value  = `alissa's archive — ${PERSONA_NAMES[p] || `persona-${p}`} — Nachricht`;
+  });
 
   /* ── Instagram lightbox ── */
   const igLightbox = $('ig-lightbox');

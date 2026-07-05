@@ -68,10 +68,12 @@ Committed to the repo. Intended for friends of Alissa Gans (@alissas.archive).
 
 **Auth system (as of 2026-07-05):** Two passwords, each unlocking a different content section (persona). The `HASHES` array in the JS holds `sha256(password)` for verification only — the actual AES key is derived separately via PBKDF2 and never stored in the HTML.
 
-| Password | `HASHES` index | Persona | Archive content |
-|----------|---------------|---------|-----------------|
-| Password A | `HASHES[0]` | `#persona-0` | "Noch keine Links" placeholder |
-| Password B | `HASHES[1]` | `#persona-1` | iCloud shared album (live, AES-GCM encrypted link) |
+| Password | `HASHES` index | Persona | Name | Archive content |
+|----------|---------------|---------|------|-----------------|
+| Password A | `HASHES[0]` | `#persona-0` | Berge | "Noch keine Links" placeholder |
+| Password B | `HASHES[1]` | `#persona-1` | Standesamt | iCloud shared album (live, AES-GCM encrypted link) |
+
+Persona names are used in the Web3Forms contact form subject line (`alissa's archive — Standesamt — Nachricht`) so incoming messages can be identified by source without exposing the password.
 
 > **Critical:** every `data-enc` value inside `#persona-N` **must** be encrypted with the password at `HASHES[N]`. Putting a link encrypted with password B into persona-0 will fail silently — AES-GCM auth tag rejection produces no visible error. Always verify with `node decrypt_test.js` after adding a link.
 
