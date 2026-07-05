@@ -12,7 +12,7 @@ A memorial site for photographer Martin Blume (* 23. November 1956 † 10. Mai 2
 
 **LIVE** at https://yawn9.github.io — GitHub repo: YAWN9/yawn9.github.io
 
-- Web3Forms access key is set: `c6fb22a2-6822-4c90-9e8a-bc08a3cf68ec` (index.html lines ~750 and ~788)
+- Web3Forms access key is set: `c6fb22a2-6822-4c90-9e8a-bc08a3cf68ec` (index.html lines ~750 and ~788; also friends.html contact form)
 - Domain references throughout the project use `yawn9.github.io` (not martinblume.de)
 - robots.txt is currently set to `Disallow: /` — intentionally blocking all indexing until ready to launch
 - All 40 pages across all four sub-sites have "← Martin Blume" back-navigation to `../index.html`
@@ -78,6 +78,8 @@ Persona names are used in the Web3Forms contact form subject line (`alissa's arc
 > **Critical:** every `data-enc` value inside `#persona-N` **must** be encrypted with the password at `HASHES[N]`. Putting a link encrypted with password B into persona-0 will fail silently — AES-GCM auth tag rejection produces no visible error. Always verify with `node decrypt_test.js` after adding a link.
 
 **Link encryption:** Archive links are stored as AES-256-GCM ciphertext in `data-enc` attributes (base64url-encoded `IV[12] + ciphertext + authTag[16]`). Key is derived with PBKDF2-SHA256, 100 000 iterations, salt `alissas.archive.v1`. Run `node encrypt_link.js` locally to encrypt new links — the script derives the same key from the password and outputs a value ready to paste into `data-enc=""`. Links for persona 0 must be encrypted with password A; links for persona 1 with password B (they cannot cross-decrypt). See [`link-encryption-guide.md`](link-encryption-guide.md) for step-by-step instructions.
+
+**Contact form:** A "Kontakt / Feedback" form sits between the Instagram embed and the archive links (inside `#page`, only visible after login). Name + message required; email optional. Submits to Web3Forms (same key as index.html). Subject line and a `persona` field are stamped dynamically on submit using `PERSONA_NAMES` — e.g. `alissa's archive — Standesamt — Nachricht` — so incoming emails identify which password group sent them. Redirect after submit returns to `friends.html`; sessionStorage keeps the session alive so the lock screen is not shown again.
 
 **Lightbox architecture:** Tiles are `<button>` elements with `data-post="ID"`. Clicking opens an in-page lightbox: blockquote markup lives in inert `<template>` elements, cloned fresh into a visible container on each open, then `instgrm.Embeds.process()` is called. Closing clears the body so the next open gets a fresh clone. Esc key and backdrop click also close. No embed section at the bottom of the page.
 
@@ -231,7 +233,8 @@ Key things a future Claude session should know:
 - `fineart-ultralarge/vita.html` has the richest biographical content — early exhibitions back to 1991, photokina appearances, Günter Wallraff collaboration, Vestiges project description — but stops at 2000
 - The real-photography.de site is in English; the others are German + French
 - The profile.gif (silhouette of photographer with umbrella) is the site logo
-- Web3Forms is used for contact (×1) and condolences (×1) — same key for both
+- Web3Forms is used for contact (×1) and condolences (×1) on index.html, and a contact form (×1) on friends.html — all use the same key
+- `friends.html` has a "Kontakt / Feedback" form (between IG embed and archive links); subject is dynamically set to `alissa's archive — <PersonaName> — Nachricht` so incoming emails are identifiable by persona
 - All corrupted image files came from the Wayback Machine as HTML; they cannot be recovered from the archive — only original family files can replace them
 - `friends.html` is a single-gate multi-persona page for Alissa Gans's Instagram followers; committed but noindexed. Two passwords → two different archive sections. Links are AES-256-GCM encrypted in `data-enc` attrs; run `node encrypt_link.js` locally to add new ones
 - `friends.html` tile/lightbox: 4:5 `<button data-post="ID">` tiles → in-page lightbox (template clone + `instgrm.Embeds.process()`)
