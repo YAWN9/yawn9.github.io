@@ -12,7 +12,8 @@ A memorial site for photographer Martin Blume (* 23. November 1956 † 10. Mai 2
 
 **LIVE** at https://yawn9.github.io — GitHub repo: YAWN9/yawn9.github.io
 
-- Web3Forms access key is set: `c6fb22a2-6822-4c90-9e8a-bc08a3cf68ec` (index.html lines ~750 and ~788; also friends.html contact form)
+- Web3Forms keys: index.html "Erinnerungen" form → `97ba4895-a00b-43a7-a474-989e70832c21`; friends.html contact form → `c6fb22a2-6822-4c90-9e8a-bc08a3cf68ec`
+- index.html has one contact form only (the "Erinnerungen teilen" form) — the upper Kontakt form was removed
 - Domain references throughout the project use `yawn9.github.io` (not martinblume.de)
 - robots.txt is currently set to `Disallow: /` — intentionally blocking all indexing until ready to launch
 - All 40 pages across all four sub-sites have "← Martin Blume" back-navigation to `../index.html`
