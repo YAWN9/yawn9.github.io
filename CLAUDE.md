@@ -73,7 +73,7 @@ Committed to the repo. Intended for friends of Alissa Gans (@alissas.archive).
 | Password A | `#persona-0` | iCloud shared album (live, AES-GCM encrypted link) |
 | Password B | `#persona-1` | "Noch keine Links" placeholder |
 
-**Link encryption:** Archive links are stored as AES-256-GCM ciphertext in `data-enc` attributes (base64url-encoded `IV[12] + ciphertext + authTag[16]`). Key is derived with PBKDF2-SHA256, 100 000 iterations, salt `alissas.archive.v1`. Run `node encrypt_link.js` locally to encrypt new links — the script derives the same key from the password and outputs a value ready to paste into `data-enc=""`. Links for persona 0 must be encrypted with password A; links for persona 1 with password B (they cannot cross-decrypt).
+**Link encryption:** Archive links are stored as AES-256-GCM ciphertext in `data-enc` attributes (base64url-encoded `IV[12] + ciphertext + authTag[16]`). Key is derived with PBKDF2-SHA256, 100 000 iterations, salt `alissas.archive.v1`. Run `node encrypt_link.js` locally to encrypt new links — the script derives the same key from the password and outputs a value ready to paste into `data-enc=""`. Links for persona 0 must be encrypted with password A; links for persona 1 with password B (they cannot cross-decrypt). See [`link-encryption-guide.md`](link-encryption-guide.md) for step-by-step instructions.
 
 **Lightbox architecture:** Tiles are `<button>` elements with `data-post="ID"`. Clicking opens an in-page lightbox: blockquote markup lives in inert `<template>` elements, cloned fresh into a visible container on each open, then `instgrm.Embeds.process()` is called. Closing clears the body so the next open gets a fresh clone. Esc key and backdrop click also close. No embed section at the bottom of the page.
 
@@ -100,6 +100,7 @@ Committed to the repo. Intended for friends of Alissa Gans (@alissas.archive).
 ├── robots.txt              ← Currently Disallow: / (intentional — pre-launch)
 ├── profile.gif             ← Silhouette logo — used as favicon + gallery placeholder
 ├── encrypt_link.js         ← Local Node.js script — encrypts URLs for friends.html data-enc attrs
+├── link-encryption-guide.md ← Step-by-step guide for adding encrypted links to friends.html
 ├── CLAUDE.md               ← This file
 │
 ├── images/
