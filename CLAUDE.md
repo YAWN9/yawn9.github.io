@@ -101,7 +101,8 @@ Committed to the repo. Intended for friends of Alissa Gans (@alissas.archive).
 ├── sitemap.xml             ← Missing 9 pages (see TODO above)
 ├── robots.txt              ← Currently Disallow: / (intentional — pre-launch)
 ├── profile.gif             ← Silhouette logo — used as favicon + gallery placeholder
-├── encrypt_link.js         ← Local Node.js script — encrypts URLs for friends.html data-enc attrs
+├── encrypt_link.js          ← Encrypts a URL for a friends.html data-enc attr (run with correct persona password)
+├── decrypt_test.js          ← Verifies a password + data-enc pair decrypts correctly before committing
 ├── link-encryption-guide.md ← Step-by-step guide for adding encrypted links to friends.html
 ├── CLAUDE.md               ← This file
 │
