@@ -791,10 +791,10 @@
       const enc = el.dataset.enc;
       if (!enc) continue;
       try {
-        const bytes = Uint8Array.from(
-          atob(enc.replace(/-/g, '+').replace(/_/g, '/')),
-          c => c.charCodeAt(0)
-        );
+        /* base64url → standard base64 (replace chars + restore padding) */
+        const b64  = enc.replace(/-/g, '+').replace(/_/g, '/');
+        const padded = b64 + '='.repeat((4 - b64.length % 4) % 4);
+        const bytes = Uint8Array.from(atob(padded), c => c.charCodeAt(0));
         const plain = await crypto.subtle.decrypt(
           { name: 'AES-GCM', iv: bytes.slice(0, 12) },
           key,
@@ -803,13 +803,15 @@
         el.href   = new TextDecoder().decode(plain);
         el.target = '_blank';
         el.rel    = 'noopener noreferrer';
-      } catch {}
+        el.dataset.decrypted = '1';
+      } catch (err) { console.error('decryptLinks:', err); }
     }
   }
 
-  /* Prevent # navigation for empty placeholder links */
-  document.querySelectorAll('[data-enc]').forEach(a => {
-    a.addEventListener('click', e => { if (!a.dataset.enc) e.preventDefault(); });
+  /* Block clicks on links that haven't been decrypted yet */
+  document.addEventListener('click', e => {
+    const a = e.target.closest('[data-enc]');
+    if (a && !a.dataset.decrypted) e.preventDefault();
   });
 
   /* ── Lockout (localStorage — survives reload) ── */
