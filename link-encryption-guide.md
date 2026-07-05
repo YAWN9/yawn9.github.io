@@ -2,10 +2,13 @@
 
 ## Current state (2026-07-05)
 
-| Persona | Password | Live links |
-|---------|----------|------------|
-| 0 (`#persona-0`) | Password A | 1 — iCloud shared album (encrypted) |
-| 1 (`#persona-1`) | Password B | 0 — "Noch keine Links" placeholder |
+| Persona | Password (`HASHES` index) | Live links |
+|---------|--------------------------|------------|
+| 0 (`#persona-0`) | Password A (`HASHES[0]`) | 0 — "Noch keine Links" placeholder |
+| 1 (`#persona-1`) | Password B (`HASHES[1]`) | 1 — iCloud shared album (encrypted) |
+
+> **Rule:** every `data-enc` in `#persona-N` must be encrypted with `HASHES[N]`'s password.
+> Verify any new link with `node decrypt_test.js` before committing.
 
 ---
 

@@ -68,10 +68,12 @@ Committed to the repo. Intended for friends of Alissa Gans (@alissas.archive).
 
 **Auth system (as of 2026-07-05):** Two passwords, each unlocking a different content section (persona). The `HASHES` array in the JS holds `sha256(password)` for verification only — the actual AES key is derived separately via PBKDF2 and never stored in the HTML.
 
-| Password | Persona | Archive content |
-|----------|---------|-----------------|
-| Password A | `#persona-0` | iCloud shared album (live, AES-GCM encrypted link) |
-| Password B | `#persona-1` | "Noch keine Links" placeholder |
+| Password | `HASHES` index | Persona | Archive content |
+|----------|---------------|---------|-----------------|
+| Password A | `HASHES[0]` | `#persona-0` | "Noch keine Links" placeholder |
+| Password B | `HASHES[1]` | `#persona-1` | iCloud shared album (live, AES-GCM encrypted link) |
+
+> **Critical:** every `data-enc` value inside `#persona-N` **must** be encrypted with the password at `HASHES[N]`. Putting a link encrypted with password B into persona-0 will fail silently — AES-GCM auth tag rejection produces no visible error. Always verify with `node decrypt_test.js` after adding a link.
 
 **Link encryption:** Archive links are stored as AES-256-GCM ciphertext in `data-enc` attributes (base64url-encoded `IV[12] + ciphertext + authTag[16]`). Key is derived with PBKDF2-SHA256, 100 000 iterations, salt `alissas.archive.v1`. Run `node encrypt_link.js` locally to encrypt new links — the script derives the same key from the password and outputs a value ready to paste into `data-enc=""`. Links for persona 0 must be encrypted with password A; links for persona 1 with password B (they cannot cross-decrypt). See [`link-encryption-guide.md`](link-encryption-guide.md) for step-by-step instructions.
 

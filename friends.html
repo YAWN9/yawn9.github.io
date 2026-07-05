@@ -711,8 +711,14 @@
     <div id="persona-0" class="persona-section hidden">
       <p class="archive-eyebrow">Privates Archiv</p>
       <h2 class="archive-title">Shooting-Ordner &amp; Links</h2>
+      <p class="archive-empty">Noch keine Links für diese Gruppe hinterlegt.</p>
+    </div>
+
+    <div id="persona-1" class="persona-section hidden">
+      <p class="archive-eyebrow">Privates Archiv</p>
+      <h2 class="archive-title">Shooting-Ordner &amp; Links</h2>
       <div class="folder-grid">
-        <!-- Encrypted with password A — run encrypt_link.js to add more cards -->
+        <!-- Encrypted with password B (HASHES[1]) — run encrypt_link.js with that password to add more -->
         <a href="#" class="folder-link" data-enc="LhAC08K9dVusTFb3fMgUj9HLjdsRw8uW7kLuFYvPHk1YMXF-nInOSAf0j9hcimYzjP05LHxGmSPD27ot0FOcSw1uw15ZVpOhn0hAY5SYE6s9tKL1vw">
           <div class="folder-card">
             <div class="folder-info">
@@ -723,12 +729,6 @@
           </div>
         </a>
       </div>
-    </div>
-
-    <div id="persona-1" class="persona-section hidden">
-      <p class="archive-eyebrow">Privates Archiv</p>
-      <h2 class="archive-title">Shooting-Ordner &amp; Links</h2>
-      <p class="archive-empty">Noch keine Links für diese Gruppe hinterlegt.</p>
     </div>
 
   </div>
@@ -742,10 +742,13 @@
 </noscript>
 
 <script>
-  /* sha256(password) hashes — used only to verify; PBKDF2 key is derived separately */
+  /* sha256(password) hashes — used only to verify; PBKDF2 key is derived separately.
+     IMPORTANT: the index here must match the persona-N section each password unlocks,
+     AND every data-enc in persona-N must be encrypted with HASHES[N]'s password.
+     Swapping passwords without re-encrypting the links will break decryption silently. */
   const HASHES = [
-    'ddbe4974ab8ef04f44272369cd77edcec08ddd575bef739a45d4e37baa510aa3', // password A → persona 0
-    '711300b864bc7963eb40b2939eadb36ff486f92729c849cb287338f188f7f9de'  // password B → persona 1
+    'ddbe4974ab8ef04f44272369cd77edcec08ddd575bef739a45d4e37baa510aa3', // → persona 0 (no links yet)
+    '711300b864bc7963eb40b2939eadb36ff486f92729c849cb287338f188f7f9de'  // → persona 1 (iCloud album)
   ];
   const KDF_SALT = 'alissas.archive.v1';
   const KDF_ITER = 100_000;
