@@ -942,8 +942,18 @@
 
   /* ── Boot ── */
   function init() {
-    if (msLeft()   > 0) { showLockout();            return; }
-    if (isAuthed())     { showPage(getPersona());    return; }
+    if (msLeft() > 0) { showLockout(); return; }
+    if (isAuthed()) {
+      /* If auth flag is set but AES key is missing (stale session), force re-login */
+      if (!sessionStorage.getItem('aa_key')) {
+        sessionStorage.removeItem('aa_ok');
+        sessionStorage.removeItem('aa_persona');
+        showLock();
+        return;
+      }
+      showPage(getPersona());
+      return;
+    }
     showLock();
   }
   init();
