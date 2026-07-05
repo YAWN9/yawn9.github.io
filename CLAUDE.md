@@ -64,21 +64,27 @@ A memorial site for photographer Martin Blume (* 23. November 1956 † 10. Mai 2
 Committed to the repo. Intended for friends of Alissa Gans (@alissas.archive).
 
 - `<meta name="robots" content="noindex, nofollow">` — not indexed
-- Two-level password protection using SHA-256 hashed keys stored in the file
 - 3-attempt lockout with 30-minute timeout
-- **Level 1:** Shows Instagram profile card + @alissas.archive embed with 3 real posts (DVWLXCOjBzH, DU_NgxEDNj2, DO24N6bDGfw)
-- **Level 2:** Shows private folder links (4 placeholder slots)
 
-**Deployed architecture (as of 2026-07-05):** Tiles are `<button>` elements with `data-post="ID"`. Clicking a tile opens an in-page lightbox: the blockquote markup lives in inert `<template>` elements, cloned fresh into a visible container on each open, then `instgrm.Embeds.process()` is called. This avoids the hidden-at-load zero-height bug. Closing the lightbox clears the body so the next open gets a fresh clone. Esc key and backdrop click also close. No embed section at the bottom of the page.
+**Auth system (as of 2026-07-05):** Two passwords, each unlocking a different content section (persona). The `HASHES` array in the JS holds `sha256(password)` for verification only — the actual AES key is derived separately via PBKDF2 and never stored in the HTML.
 
-**Local assets ready, not yet committed (`alissa/` folder — gitignored):**
-- `alissa/new1.png`, `new2.png`, `new3.png` — post images (current, in use as tile backgrounds)
-- `alissa/profile.jpg` — Alissa's profile photo (in use in story-ring circle)
-- `alissa/4_5_1.PNG`, `4_5_2.PNG`, `4_5_3.PNG` — older portrait crops (superseded by new1/2/3)
+| Password | Persona | Archive content |
+|----------|---------|-----------------|
+| Password A | `#persona-0` | iCloud shared album (live, AES-GCM encrypted link) |
+| Password B | `#persona-1` | "Noch keine Links" placeholder |
 
-**Current tile design (applied 2026-07-05):** 4:5 portrait tiles, `new1/2/3.png` as `<img>` with `object-fit: cover` (crops to fit, no stretching), `profile.jpg` real avatar in story ring, display name "Alissa Gans", bio "Munich-based architect and photographer". Commit `friends.html` + `alissa/` together when ready.
+**Link encryption:** Archive links are stored as AES-256-GCM ciphertext in `data-enc` attributes (base64url-encoded `IV[12] + ciphertext + authTag[16]`). Key is derived with PBKDF2-SHA256, 100 000 iterations, salt `alissas.archive.v1`. Run `node encrypt_link.js` locally to encrypt new links — the script derives the same key from the password and outputs a value ready to paste into `data-enc=""`. Links for persona 0 must be encrypted with password A; links for persona 1 with password B (they cannot cross-decrypt).
 
-**History note:** Earlier experiments (A–I, documented 2026-06-07) explored embedding the IG widget *inside* the tiles — rejected because the blockquote's nested `<a>` tags break the outer anchor, and cropped embeds mostly show header chrome. Also explored a "tiles scroll to inline embeds at page bottom" structure and a "tiles link directly to instagram.com" structure — both rejected in favour of the lightbox. All experiments are in `_scratch/` (see `_scratch/index.html` for a clickable overview).
+**Lightbox architecture:** Tiles are `<button>` elements with `data-post="ID"`. Clicking opens an in-page lightbox: blockquote markup lives in inert `<template>` elements, cloned fresh into a visible container on each open, then `instgrm.Embeds.process()` is called. Closing clears the body so the next open gets a fresh clone. Esc key and backdrop click also close. No embed section at the bottom of the page.
+
+**Tile design:** 4:5 portrait tiles, `alissa/new1/2/3.png` as `<img>` with `object-fit: cover`, `alissa/profile.jpg` as real avatar in story ring, display name "Alissa Gans", bio "Munich-based architect and photographer".
+
+**Local-only assets (`alissa/` folder — untracked):**
+- `alissa/new1.png`, `new2.png`, `new3.png` — tile background images
+- `alissa/profile.jpg` — avatar in story ring
+- Commit `alissa/` together with `friends.html` when ready to deploy the tile images
+
+**History note:** Earlier experiments (A–I) explored embedding the IG widget inside the tiles — rejected. Also tried tiles → inline embeds at page bottom, and tiles → direct instagram.com links — both rejected in favour of the lightbox. Earlier password schemes used XOR-with-hash then a two-level L1/L2 gate — replaced by the current single-gate multi-persona AES-GCM system after a JS breakage. Experiments are in `_scratch/`.
 
 ---
 
@@ -93,6 +99,7 @@ Committed to the repo. Intended for friends of Alissa Gans (@alissas.archive).
 ├── sitemap.xml             ← Missing 9 pages (see TODO above)
 ├── robots.txt              ← Currently Disallow: / (intentional — pre-launch)
 ├── profile.gif             ← Silhouette logo — used as favicon + gallery placeholder
+├── encrypt_link.js         ← Local Node.js script — encrypts URLs for friends.html data-enc attrs
 ├── CLAUDE.md               ← This file
 │
 ├── images/
@@ -220,10 +227,9 @@ Key things a future Claude session should know:
 - The profile.gif (silhouette of photographer with umbrella) is the site logo
 - Web3Forms is used for contact (×1) and condolences (×1) — same key for both
 - All corrupted image files came from the Wayback Machine as HTML; they cannot be recovered from the archive — only original family files can replace them
-- `friends.html` is a two-level password-protected page for Alissa Gans's Instagram followers; committed but noindexed
-- The deployed `friends.html` tile architecture: `<button data-post="ID">` → in-page lightbox (template clone + `instgrm.Embeds.process()`) — no embed section at bottom
-- `alissa/` folder exists locally (gitignored): `4_5_1.PNG`, `4_5_2.PNG`, `4_5_3.PNG`, `profile.jpg` — ready for tile redesign
-- Three tile redesign drafts in `_scratch/`: version_j (4:5, dark avatar), version_k (4:5, real avatar), version_l (3:4, real avatar) — pick one and apply to `friends.html` + commit `alissa/` assets
+- `friends.html` is a single-gate multi-persona page for Alissa Gans's Instagram followers; committed but noindexed. Two passwords → two different archive sections. Links are AES-256-GCM encrypted in `data-enc` attrs; run `node encrypt_link.js` locally to add new ones
+- `friends.html` tile/lightbox: 4:5 `<button data-post="ID">` tiles → in-page lightbox (template clone + `instgrm.Embeds.process()`)
+- `alissa/` folder exists locally (untracked): `new1/2/3.png` tile images + `profile.jpg` avatar — commit together with friends.html when ready to deploy images
 - `aaronblume_site/` is a local-only draft for Aaron Blume's personal site (aaronblu.me) — not committed
 
 ---
