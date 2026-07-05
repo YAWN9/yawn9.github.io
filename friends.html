@@ -498,7 +498,6 @@
     }
 
     /* ── Persona sections ── */
-    .persona-section { /* container only — revealed by JS */ }
     .archive-empty {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 0.72rem;
@@ -743,20 +742,13 @@
 </noscript>
 
 <script>
-  /* ─────────────────────────────────────────────────────────────────
-     Auth config
-     HASHES[i] = sha256(password_i) — used only to verify the password.
-     The AES-GCM decryption key is derived separately via PBKDF2 from
-     the raw password, so knowing a hash does NOT help decrypt links.
-     Each password produces a different key → persona 0 and 1 links
-     are encrypted independently and cannot cross-decrypt.
-  ───────────────────────────────────────────────────────────────── */
+  /* sha256(password) hashes — used only to verify; PBKDF2 key is derived separately */
   const HASHES = [
     'ddbe4974ab8ef04f44272369cd77edcec08ddd575bef739a45d4e37baa510aa3', // password A → persona 0
     '711300b864bc7963eb40b2939eadb36ff486f92729c849cb287338f188f7f9de'  // password B → persona 1
   ];
-  const KDF_SALT   = 'alissas.archive.v1';
-  const KDF_ITER   = 100000;
+  const KDF_SALT = 'alissas.archive.v1';
+  const KDF_ITER = 100_000;
   const MAX_FAILS  = 3;
   const LOCKOUT_MS = 30 * 60 * 1000;
 
@@ -799,7 +791,6 @@
       const enc = el.dataset.enc;
       if (!enc) continue;
       try {
-        /* base64url → bytes. First 12 bytes = IV, rest = ciphertext + auth tag */
         const bytes = Uint8Array.from(
           atob(enc.replace(/-/g, '+').replace(/_/g, '/')),
           c => c.charCodeAt(0)
@@ -812,7 +803,7 @@
         el.href   = new TextDecoder().decode(plain);
         el.target = '_blank';
         el.rel    = 'noopener noreferrer';
-      } catch { /* wrong key or placeholder — leave href as # */ }
+      } catch {}
     }
   }
 
@@ -821,12 +812,9 @@
     a.addEventListener('click', e => { if (!a.dataset.enc) e.preventDefault(); });
   });
 
-  const getPersona = () => parseInt(sessionStorage.getItem('aa_persona') || '0', 10);
-
   /* ── Lockout (localStorage — survives reload) ── */
-  const getFails  = () => +(localStorage.getItem('aa_fails') || 0);
-  const getUntil  = () => +(localStorage.getItem('aa_until') || 0);
-  const msLeft    = () => { const t = getUntil(); return t > Date.now() ? t - Date.now() : 0; };
+  const getFails = () => +(localStorage.getItem('aa_fails') || 0);
+  const msLeft   = () => { const t = +(localStorage.getItem('aa_until') || 0); return t > Date.now() ? t - Date.now() : 0; };
 
   function addFail() {
     const f = getFails() + 1;
@@ -840,7 +828,8 @@
   }
 
   /* ── Auth (sessionStorage — clears when tab closes) ── */
-  const isAuthed  = () => sessionStorage.getItem('aa_ok') === '1';
+  const isAuthed   = () => sessionStorage.getItem('aa_ok') === '1';
+  const getPersona = () => parseInt(sessionStorage.getItem('aa_persona') || '0', 10);
   function setAuthed(persona) {
     sessionStorage.setItem('aa_ok', '1');
     sessionStorage.setItem('aa_persona', String(persona));
@@ -888,7 +877,7 @@
     show($('page'));
     document.querySelectorAll('.persona-section').forEach(el => hide(el));
     show($(`persona-${persona}`));
-    decryptLinks(persona); /* async — fires in background, links appear once decrypted */
+    decryptLinks(persona);
   }
 
   /* ── Password handler ── */
