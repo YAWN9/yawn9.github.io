@@ -8,7 +8,7 @@ A memorial site for photographer Martin Blume (* 23. November 1956 † 10. Mai 2
 
 ---
 
-## Current state (as of 2026-06-05)
+## Current state (as of 2026-07-05)
 
 **LIVE** at https://yawn9.github.io — GitHub repo: YAWN9/yawn9.github.io
 
@@ -68,6 +68,17 @@ Committed to the repo. Intended for friends of Alissa Gans (@alissas.archive).
 - 3-attempt lockout with 30-minute timeout
 - **Level 1:** Shows Instagram profile card + @alissas.archive embed with 3 real posts (DVWLXCOjBzH, DU_NgxEDNj2, DO24N6bDGfw)
 - **Level 2:** Shows private folder links (4 placeholder slots)
+
+**Deployed architecture (as of 2026-07-05):** Tiles are `<button>` elements with `data-post="ID"`. Clicking a tile opens an in-page lightbox: the blockquote markup lives in inert `<template>` elements, cloned fresh into a visible container on each open, then `instgrm.Embeds.process()` is called. This avoids the hidden-at-load zero-height bug. Closing the lightbox clears the body so the next open gets a fresh clone. Esc key and backdrop click also close. No embed section at the bottom of the page.
+
+**Local assets ready, not yet committed (`alissa/` folder — gitignored):**
+- `alissa/new1.png`, `new2.png`, `new3.png` — post images (current, in use as tile backgrounds)
+- `alissa/profile.jpg` — Alissa's profile photo (in use in story-ring circle)
+- `alissa/4_5_1.PNG`, `4_5_2.PNG`, `4_5_3.PNG` — older portrait crops (superseded by new1/2/3)
+
+**Current tile design (applied 2026-07-05):** 4:5 portrait tiles, `new1/2/3.png` as `<img>` with `object-fit: cover` (crops to fit, no stretching), `profile.jpg` real avatar in story ring, display name "Alissa Gans", bio "Munich-based architect and photographer". Commit `friends.html` + `alissa/` together when ready.
+
+**History note:** Earlier experiments (A–I, documented 2026-06-07) explored embedding the IG widget *inside* the tiles — rejected because the blockquote's nested `<a>` tags break the outer anchor, and cropped embeds mostly show header chrome. Also explored a "tiles scroll to inline embeds at page bottom" structure and a "tiles link directly to instagram.com" structure — both rejected in favour of the lightbox. All experiments are in `_scratch/` (see `_scratch/index.html` for a clickable overview).
 
 ---
 
@@ -210,6 +221,9 @@ Key things a future Claude session should know:
 - Web3Forms is used for contact (×1) and condolences (×1) — same key for both
 - All corrupted image files came from the Wayback Machine as HTML; they cannot be recovered from the archive — only original family files can replace them
 - `friends.html` is a two-level password-protected page for Alissa Gans's Instagram followers; committed but noindexed
+- The deployed `friends.html` tile architecture: `<button data-post="ID">` → in-page lightbox (template clone + `instgrm.Embeds.process()`) — no embed section at bottom
+- `alissa/` folder exists locally (gitignored): `4_5_1.PNG`, `4_5_2.PNG`, `4_5_3.PNG`, `profile.jpg` — ready for tile redesign
+- Three tile redesign drafts in `_scratch/`: version_j (4:5, dark avatar), version_k (4:5, real avatar), version_l (3:4, real avatar) — pick one and apply to `friends.html` + commit `alissa/` assets
 - `aaronblume_site/` is a local-only draft for Aaron Blume's personal site (aaronblu.me) — not committed
 
 ---

@@ -133,7 +133,7 @@
     .lock-msg.err  { color: var(--err); }
     .lock-msg.hint { color: var(--cream-dim); }
 
-    /* ── Lockout (full-page) ── */
+    /* ── Lockout ── */
     .lockout-glyph {
       font-size: 1.75rem;
       color: var(--cream-dim);
@@ -214,12 +214,6 @@
       margin-bottom: 1rem;
       line-height: 1.3;
     }
-    .page-body {
-      font-size: 0.88rem;
-      color: var(--cream-dim);
-      line-height: 1.85;
-      margin-bottom: 2.75rem;
-    }
 
     /* ── Instagram profile embed ── */
     .ig-embed {
@@ -235,7 +229,6 @@
       padding: 1.2rem 1.2rem 1rem;
     }
 
-    /* Story ring: authentic IG gradient */
     .ig-story-ring {
       width: 74px;
       height: 74px;
@@ -250,9 +243,15 @@
       border-radius: 50%;
       background: #080706;
       border: 2px solid #080706;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      overflow: hidden;
+    }
+    .ig-story-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 50%;
+      display: block;
     }
 
     .ig-embed-identity {
@@ -308,11 +307,7 @@
       line-height: 1.6;
     }
 
-    /* Embedded posts — small dark grid tiles, like Instagram's own
-       profile grid, but fully in-palette: a gold aperture glyph stands
-       in for the photo (Instagram's embeds can't be cropped to just the
-       image — they always carry their own white header chrome). Clicking
-       a tile opens the real post on Instagram. */
+    /* Portrait photo tiles — 4:5, images cropped to fit via object-fit */
     .ig-posts {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -321,22 +316,26 @@
     }
     .ig-post-tile {
       position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 4 / 5;
       overflow: hidden;
-      background:
-        radial-gradient(circle at 50% 45%, rgba(137, 112, 82, 0.16), transparent 65%),
-        linear-gradient(150deg, #18150f, #0a0908);
-      text-decoration: none;
+      background: #0a0908;
+      border: none;
+      padding: 0;
+      cursor: pointer;
     }
-    .ig-post-glyph {
-      transition: opacity 0.25s, transform 0.25s;
+    .ig-post-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.3s ease, opacity 0.25s;
     }
-    .ig-post-tile:hover .ig-post-glyph {
-      opacity: 0.45;
-      transform: scale(0.9);
+    .ig-post-tile:hover .ig-post-photo {
+      transform: scale(1.04);
+      opacity: 0.72;
     }
     .ig-post-overlay {
       position: absolute;
@@ -362,7 +361,7 @@
     .ig-post-tile:hover .ig-post-overlay { background: rgba(13, 11, 9, 0.7); }
     .ig-post-tile:hover .ig-post-overlay span { opacity: 1; transform: translateY(0); }
 
-    /* ── In-page lightbox: opens the real Instagram widget on click ── */
+    /* ── Lightbox ── */
     .ig-lightbox {
       position: fixed;
       inset: 0;
@@ -452,69 +451,6 @@
       margin-bottom: 2rem;
     }
 
-    /* ── Inline lock (archive) ── */
-    .inline-lock {
-      background: var(--bg2);
-      border: 1px solid var(--rule);
-      padding: 2.25rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      text-align: center;
-    }
-    .inline-lock-icon { opacity: 0.2; margin-bottom: 0.25rem; }
-    .inline-lock-label {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 0.6rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--cream-dim);
-    }
-    .inline-pw-form {
-      width: 100%;
-      max-width: 240px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    /* ── Inline lockout (archive) ── */
-    .inline-lockout {
-      background: var(--bg2);
-      border: 1px solid var(--rule);
-      padding: 2.25rem 1.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      text-align: center;
-    }
-    .inline-lockout-head {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 0.58rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--err);
-      margin-bottom: 0.25rem;
-    }
-    .inline-lockout-clock {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 1.8rem;
-      font-weight: 300;
-      letter-spacing: 0.06em;
-      color: var(--cream-dim);
-    }
-    .inline-lockout-note {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 0.58rem;
-      letter-spacing: 0.1em;
-      font-style: italic;
-      color: var(--cream-dim);
-      opacity: 0.5;
-    }
-
     /* ── Folder grid ── */
     .folder-grid { display: flex; flex-direction: column; }
 
@@ -561,15 +497,15 @@
       flex-shrink: 0;
     }
 
-    .folder-placeholder-note {
+    /* ── Persona sections ── */
+    .persona-section { /* container only — revealed by JS */ }
+    .archive-empty {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 0.6rem;
+      font-size: 0.72rem;
       letter-spacing: 0.08em;
       color: var(--cream-dim);
       font-style: italic;
-      text-align: center;
-      margin-top: 1.75rem;
-      opacity: 0.5;
+      padding: 1.5rem 0;
     }
 
     /* ── Utils ── */
@@ -596,11 +532,10 @@
 <div class="grain" aria-hidden="true"></div>
 
 <!-- ══════════════════════════════════
-     LEVEL 1 — LOCK SCREEN
+     LOCK SCREEN
 ══════════════════════════════════ -->
 <div id="screen-lock" class="full-screen">
 
-  <!-- Aperture sigil -->
   <svg class="lock-sigil" width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <circle cx="26" cy="26" r="24" stroke="#897052" stroke-width="0.8"/>
     <circle cx="26" cy="26" r="15" stroke="#897052" stroke-width="0.6" stroke-dasharray="2.5 3.5"/>
@@ -618,32 +553,32 @@
   <form class="lock-form" onsubmit="return false">
     <input
       class="pw-input"
-      id="pw1"
+      id="pw"
       type="password"
       placeholder="schlüssel"
       autocomplete="off"
       autocorrect="off"
       spellcheck="false"
     >
-    <p class="lock-msg err" id="msg1" aria-live="polite"></p>
-    <button class="btn" type="submit" onclick="tryPw(1)">Öffnen</button>
-    <p class="lock-msg hint" id="hint1"></p>
+    <p class="lock-msg err" id="msg" aria-live="polite"></p>
+    <button class="btn" type="submit" onclick="tryPw()">Öffnen</button>
+    <p class="lock-msg hint" id="hint"></p>
   </form>
 
 </div>
 
 <!-- ══════════════════════════════════
-     LEVEL 1 — LOCKOUT SCREEN
+     LOCKOUT SCREEN
 ══════════════════════════════════ -->
 <div id="screen-lockout" class="full-screen hidden">
   <div class="lockout-glyph">◎</div>
   <p class="lockout-heading">Zugang gesperrt</p>
-  <div class="lockout-clock" id="clock1">—</div>
+  <div class="lockout-clock" id="clock">—</div>
   <p class="lockout-note">Zu viele Versuche — bitte warte.</p>
 </div>
 
 <!-- ══════════════════════════════════
-     PAGE CONTENT (Level 1 unlocked)
+     PAGE CONTENT (unlocked)
 ══════════════════════════════════ -->
 <div id="page" class="hidden fade-in">
 
@@ -655,10 +590,6 @@
   <div class="section">
     <p class="eyebrow">Für Freunde</p>
     <h1 class="page-title">Willkommen im Archiv.</h1>
-    <p class="page-body">
-      Hier findest du alles — Shooting-Ordner, Updates, Links.<br>
-      Nur für Freunde. Das Archiv wächst stetig.
-    </p>
 
     <!-- Instagram profile card -->
     <div class="ig-embed">
@@ -670,21 +601,15 @@
           rel="noopener noreferrer"
           class="ig-embed-identity"
         >
-          <!-- Avatar with story gradient ring -->
           <div class="ig-story-ring" aria-hidden="true">
             <div class="ig-story-inner">
-              <svg width="28" height="28" viewBox="0 0 52 52" fill="none">
-                <circle cx="26" cy="26" r="23" stroke="#897052" stroke-width="0.7"/>
-                <circle cx="26" cy="26" r="14" stroke="#897052" stroke-width="0.6" stroke-dasharray="2 3"/>
-                <circle cx="26" cy="26" r="8"  stroke="#897052" stroke-width="0.7"/>
-                <circle cx="26" cy="26" r="3.5" fill="#897052" opacity="0.3"/>
-              </svg>
+              <img src="alissa/profile.jpg" alt="">
             </div>
           </div>
 
           <div class="ig-embed-info">
             <p class="ig-embed-username">alissas.archive</p>
-            <p class="ig-embed-displayname">alissa's archive</p>
+            <p class="ig-embed-displayname">Alissa Gans</p>
           </div>
         </a>
 
@@ -698,57 +623,29 @@
 
       <hr class="ig-embed-sep">
 
-      <!-- Bio — update this text to match the real bio -->
-      <p class="ig-embed-bio">analoge Photographie &middot; Film &amp; Archiv</p>
+      <p class="ig-embed-bio">Munich-based architect and photographer</p>
 
       <hr class="ig-embed-sep">
 
-      <!-- Instagram post grid — small dark square tiles (like IG's own
-           profile grid). Gold aperture glyph stands in for the photo;
-           swap the <svg class="ig-post-glyph"> for an <img class="ig-post-photo">
-           once a real downloaded preview image is available per post.
-           Clicking a tile opens the real Instagram widget in the lightbox below. -->
       <div class="ig-posts">
 
         <button class="ig-post-tile" type="button" data-post="DVWLXCOjBzH" aria-haspopup="dialog" aria-label="Instagram-Beitrag von @alissas.archive ansehen">
-          <svg class="ig-post-glyph" width="34" height="34" viewBox="0 0 52 52" fill="none" aria-hidden="true">
-            <circle cx="26" cy="26" r="23" stroke="#897052" stroke-width="0.7" opacity="0.4"/>
-            <circle cx="26" cy="26" r="14" stroke="#897052" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.4"/>
-            <circle cx="26" cy="26" r="8"  stroke="#897052" stroke-width="0.7" opacity="0.4"/>
-            <circle cx="26" cy="26" r="3.5" fill="#897052" opacity="0.25"/>
-          </svg>
+          <img class="ig-post-photo" src="alissa/new1.png" alt="">
           <span class="ig-post-overlay"><span>Beitrag ansehen &rarr;</span></span>
         </button>
 
         <button class="ig-post-tile" type="button" data-post="DU_NgxEDNj2" aria-haspopup="dialog" aria-label="Instagram-Beitrag von @alissas.archive ansehen">
-          <svg class="ig-post-glyph" width="34" height="34" viewBox="0 0 52 52" fill="none" aria-hidden="true">
-            <circle cx="26" cy="26" r="23" stroke="#897052" stroke-width="0.7" opacity="0.4"/>
-            <circle cx="26" cy="26" r="14" stroke="#897052" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.4"/>
-            <circle cx="26" cy="26" r="8"  stroke="#897052" stroke-width="0.7" opacity="0.4"/>
-            <circle cx="26" cy="26" r="3.5" fill="#897052" opacity="0.25"/>
-          </svg>
+          <img class="ig-post-photo" src="alissa/new2.png" alt="">
           <span class="ig-post-overlay"><span>Beitrag ansehen &rarr;</span></span>
         </button>
 
         <button class="ig-post-tile" type="button" data-post="DO24N6bDGfw" aria-haspopup="dialog" aria-label="Instagram-Beitrag von @alissas.archive ansehen">
-          <svg class="ig-post-glyph" width="34" height="34" viewBox="0 0 52 52" fill="none" aria-hidden="true">
-            <circle cx="26" cy="26" r="23" stroke="#897052" stroke-width="0.7" opacity="0.4"/>
-            <circle cx="26" cy="26" r="14" stroke="#897052" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.4"/>
-            <circle cx="26" cy="26" r="8"  stroke="#897052" stroke-width="0.7" opacity="0.4"/>
-            <circle cx="26" cy="26" r="3.5" fill="#897052" opacity="0.25"/>
-          </svg>
+          <img class="ig-post-photo" src="alissa/new3.png" alt="">
           <span class="ig-post-overlay"><span>Beitrag ansehen &rarr;</span></span>
         </button>
 
       </div>
 
-      <!-- Lightbox — renders the official Instagram widget for a closer look.
-           The blockquote markup lives in inert <template>s and gets cloned
-           into #ig-lightbox-body fresh on each open: embed.js measures and
-           converts blockquotes at the moment they're processed, so a copy
-           that already sat hidden (display:none) on page load would be
-           converted at zero height and never recover. A freshly-inserted,
-           visible copy avoids that. -->
       <div id="ig-lightbox" class="ig-lightbox hidden" aria-hidden="true">
         <div class="ig-lightbox-backdrop" data-ig-close></div>
         <div class="ig-lightbox-panel" role="dialog" aria-modal="true" aria-label="Instagram-Beitrag">
@@ -809,98 +706,34 @@
     </div>
   </div>
 
-  <!-- ── Archive / Level 2 ── -->
+  <!-- ── Archive — persona sections (revealed by JS after login) ── -->
   <div class="archive-section">
-    <p class="archive-eyebrow">Privates Archiv</p>
-    <h2 class="archive-title">Shooting-Ordner &amp; Links</h2>
 
-    <!-- Inner lock -->
-    <div id="archive-lock" class="inline-lock">
-      <svg class="inline-lock-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <rect x="5" y="11" width="14" height="10" rx="1.5" stroke="#9a8a72" stroke-width="1.1"/>
-        <path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="#9a8a72" stroke-width="1.1" stroke-linecap="round"/>
-      </svg>
-      <p class="inline-lock-label">Zweiter Schlüssel erforderlich</p>
-      <form class="inline-pw-form" onsubmit="return false">
-        <input
-          class="pw-input"
-          id="pw2"
-          type="password"
-          placeholder="schlüssel"
-          autocomplete="off"
-          autocorrect="off"
-          spellcheck="false"
-        >
-        <p class="lock-msg err" id="msg2" aria-live="polite"></p>
-        <button class="btn" type="submit" onclick="tryPw(2)">Öffnen</button>
-        <p class="lock-msg hint" id="hint2"></p>
-      </form>
-    </div>
-
-    <!-- Inner lockout -->
-    <div id="archive-lockout" class="inline-lockout hidden">
-      <p class="inline-lockout-head">Gesperrt</p>
-      <div class="inline-lockout-clock" id="clock2">—</div>
-      <p class="inline-lockout-note">Zu viele Versuche — bitte warte.</p>
-    </div>
-
-    <!-- Folder content -->
-    <div id="archive-content" class="hidden fade-in">
+    <div id="persona-0" class="persona-section hidden">
+      <p class="archive-eyebrow">Privates Archiv</p>
+      <h2 class="archive-title">Shooting-Ordner &amp; Links</h2>
       <div class="folder-grid">
-
-        <!-- ┌────────────────────────────────────────────────────┐ -->
-        <!-- │  REPLACE href="#" with your actual folder link.   │ -->
-        <!-- │  Change "Shooting — ..." and "[Datum]" as needed. │ -->
-        <!-- └────────────────────────────────────────────────────┘ -->
-
-        <a href="#" class="folder-link" data-placeholder>
+        <!-- Encrypted with password A — run encrypt_link.js to add more cards -->
+        <a href="#" class="folder-link" data-enc="LhAC08K9dVusTFb3fMgUj9HLjdsRw8uW7kLuFYvPHk1YMXF-nInOSAf0j9hcimYzjP05LHxGmSPD27ot0FOcSw1uw15ZVpOhn0hAY5SYE6s9tKL1vw">
           <div class="folder-card">
             <div class="folder-info">
-              <p class="folder-name">Shooting — Ort / Name</p>
-              <p class="folder-meta">[Datum] &middot; Google Drive</p>
-            </div>
-            <span class="folder-tag">Drive</span>
-          </div>
-        </a>
-
-        <a href="#" class="folder-link" data-placeholder>
-          <div class="folder-card">
-            <div class="folder-info">
-              <p class="folder-name">Shooting — Ort / Name</p>
-              <p class="folder-meta">[Datum] &middot; WeTransfer</p>
-            </div>
-            <span class="folder-tag">WeTransfer</span>
-          </div>
-        </a>
-
-        <a href="#" class="folder-link" data-placeholder>
-          <div class="folder-card">
-            <div class="folder-info">
-              <p class="folder-name">Shooting — Ort / Name</p>
-              <p class="folder-meta">[Datum] &middot; iCloud</p>
+              <p class="folder-name">Shared Album</p>
+              <p class="folder-meta">iCloud</p>
             </div>
             <span class="folder-tag">iCloud</span>
           </div>
         </a>
-
-        <a href="#" class="folder-link" data-placeholder>
-          <div class="folder-card">
-            <div class="folder-info">
-              <p class="folder-name">Shooting — Ort / Name</p>
-              <p class="folder-meta">[Datum] &middot; Dropbox</p>
-            </div>
-            <span class="folder-tag">Dropbox</span>
-          </div>
-        </a>
-
       </div>
+    </div>
 
-      <p class="folder-placeholder-note">
-        Platzhalter &mdash; ersetze href=&quot;#&quot; und Labels mit echten Links.
-      </p>
+    <div id="persona-1" class="persona-section hidden">
+      <p class="archive-eyebrow">Privates Archiv</p>
+      <h2 class="archive-title">Shooting-Ordner &amp; Links</h2>
+      <p class="archive-empty">Noch keine Links für diese Gruppe hinterlegt.</p>
     </div>
 
   </div>
+
 </div><!-- #page -->
 
 <noscript>
@@ -910,151 +743,186 @@
 </noscript>
 
 <script>
-  /* ── Config ── */
-  const H = {
-    1: '711300b864bc7963eb40b2939eadb36ff486f92729c849cb287338f188f7f9de',
-    2: 'ddbe4974ab8ef04f44272369cd77edcec08ddd575bef739a45d4e37baa510aa3'
-  };
-  const MAX_FAILS   = 3;
-  const LOCKOUT_MS  = 30 * 60 * 1000; // 30 min
+  /* ─────────────────────────────────────────────────────────────────
+     Auth config
+     HASHES[i] = sha256(password_i) — used only to verify the password.
+     The AES-GCM decryption key is derived separately via PBKDF2 from
+     the raw password, so knowing a hash does NOT help decrypt links.
+     Each password produces a different key → persona 0 and 1 links
+     are encrypted independently and cannot cross-decrypt.
+  ───────────────────────────────────────────────────────────────── */
+  const HASHES = [
+    'ddbe4974ab8ef04f44272369cd77edcec08ddd575bef739a45d4e37baa510aa3', // password A → persona 0
+    '711300b864bc7963eb40b2939eadb36ff486f92729c849cb287338f188f7f9de'  // password B → persona 1
+  ];
+  const KDF_SALT   = 'alissas.archive.v1';
+  const KDF_ITER   = 100000;
+  const MAX_FAILS  = 3;
+  const LOCKOUT_MS = 30 * 60 * 1000;
 
-  /* ── Crypto ── */
+  /* ── SHA-256 (for password verification) ── */
   async function sha256(s) {
     const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
     return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
   }
 
-  /* ── Lockout (localStorage — survives reload) ── */
-  const lsKey  = (lvl, k) => `aa_l${lvl}_${k}`;
-  const getFails   = lvl => +( localStorage.getItem(lsKey(lvl, 'f')) || 0 );
-  const getUntil   = lvl => +( localStorage.getItem(lsKey(lvl, 't')) || 0 );
-  const msLeft     = lvl => { const t = getUntil(lvl); return t > Date.now() ? t - Date.now() : 0; };
+  /* ── AES-256-GCM key derivation ── */
+  async function deriveKey(password) {
+    const mat = await crypto.subtle.importKey(
+      'raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']
+    );
+    return crypto.subtle.deriveKey(
+      { name: 'PBKDF2', salt: new TextEncoder().encode(KDF_SALT), iterations: KDF_ITER, hash: 'SHA-256' },
+      mat, { name: 'AES-GCM', length: 256 }, true, ['decrypt']
+    );
+  }
 
-  function addFail(lvl) {
-    const f = getFails(lvl) + 1;
-    localStorage.setItem(lsKey(lvl, 'f'), f);
-    if (f >= MAX_FAILS) localStorage.setItem(lsKey(lvl, 't'), Date.now() + LOCKOUT_MS);
+  async function storeKey(password) {
+    const key = await deriveKey(password);
+    const raw = await crypto.subtle.exportKey('raw', key);
+    sessionStorage.setItem('aa_key', btoa(String.fromCharCode(...new Uint8Array(raw))));
+  }
+
+  async function getKey() {
+    const b64 = sessionStorage.getItem('aa_key');
+    if (!b64) return null;
+    const raw = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    return crypto.subtle.importKey('raw', raw, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+  }
+
+  /* ── Decrypt links — scoped to the logged-in persona's section ── */
+  async function decryptLinks(persona) {
+    const key     = await getKey();
+    const section = $(`persona-${persona}`);
+    if (!key || !section) return;
+    for (const el of section.querySelectorAll('[data-enc]')) {
+      const enc = el.dataset.enc;
+      if (!enc) continue;
+      try {
+        /* base64url → bytes. First 12 bytes = IV, rest = ciphertext + auth tag */
+        const bytes = Uint8Array.from(
+          atob(enc.replace(/-/g, '+').replace(/_/g, '/')),
+          c => c.charCodeAt(0)
+        );
+        const plain = await crypto.subtle.decrypt(
+          { name: 'AES-GCM', iv: bytes.slice(0, 12) },
+          key,
+          bytes.slice(12)
+        );
+        el.href   = new TextDecoder().decode(plain);
+        el.target = '_blank';
+        el.rel    = 'noopener noreferrer';
+      } catch { /* wrong key or placeholder — leave href as # */ }
+    }
+  }
+
+  /* Prevent # navigation for empty placeholder links */
+  document.querySelectorAll('[data-enc]').forEach(a => {
+    a.addEventListener('click', e => { if (!a.dataset.enc) e.preventDefault(); });
+  });
+
+  const getPersona = () => parseInt(sessionStorage.getItem('aa_persona') || '0', 10);
+
+  /* ── Lockout (localStorage — survives reload) ── */
+  const getFails  = () => +(localStorage.getItem('aa_fails') || 0);
+  const getUntil  = () => +(localStorage.getItem('aa_until') || 0);
+  const msLeft    = () => { const t = getUntil(); return t > Date.now() ? t - Date.now() : 0; };
+
+  function addFail() {
+    const f = getFails() + 1;
+    localStorage.setItem('aa_fails', f);
+    if (f >= MAX_FAILS) localStorage.setItem('aa_until', Date.now() + LOCKOUT_MS);
     return f;
   }
-  function clearFails(lvl) {
-    localStorage.removeItem(lsKey(lvl, 'f'));
-    localStorage.removeItem(lsKey(lvl, 't'));
+  function clearFails() {
+    localStorage.removeItem('aa_fails');
+    localStorage.removeItem('aa_until');
   }
 
   /* ── Auth (sessionStorage — clears when tab closes) ── */
-  const isAuthed  = lvl => sessionStorage.getItem(`aa_l${lvl}_ok`) === '1';
-  function setAuthed(lvl) {
-    sessionStorage.setItem(`aa_l${lvl}_ok`, '1');
-    clearFails(lvl);
+  const isAuthed  = () => sessionStorage.getItem('aa_ok') === '1';
+  function setAuthed(persona) {
+    sessionStorage.setItem('aa_ok', '1');
+    sessionStorage.setItem('aa_persona', String(persona));
+    clearFails();
   }
 
-  /* ── DOM helpers ── */
-  const $     = id => document.getElementById(id);
-  const show  = el => el.classList.remove('hidden');
-  const hide  = el => el.classList.add('hidden');
-  const err   = (id, msg) => { const e = $(id); if (e) e.textContent = msg; };
-  const hint  = (id, msg) => { const e = $(id); if (e) e.textContent = msg; };
+  /* ── DOM ── */
+  const $    = id => document.getElementById(id);
+  const show = el => el.classList.remove('hidden');
+  const hide = el => el.classList.add('hidden');
 
-  /* ── Countdown timers ── */
-  const timers = {};
-  function startClock(clockId, lvl, onExpire) {
-    clearInterval(timers[clockId]);
-    const el = $(clockId);
+  /* ── Countdown timer ── */
+  let clockTimer;
+  function startClock(onExpire) {
+    clearInterval(clockTimer);
+    const el = $('clock');
     function tick() {
-      const ms = msLeft(lvl);
-      if (ms <= 0) { clearInterval(timers[clockId]); onExpire(); return; }
-      const m = Math.floor(ms / 60000);
-      const s = Math.floor((ms % 60000) / 1000);
-      el.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+      const ms = msLeft();
+      if (ms <= 0) { clearInterval(clockTimer); onExpire(); return; }
+      el.textContent = `${Math.floor(ms / 60000)}:${String(Math.floor((ms % 60000) / 1000)).padStart(2, '0')}`;
     }
     tick();
-    timers[clockId] = setInterval(tick, 1000);
+    clockTimer = setInterval(tick, 1000);
   }
 
   /* ── View transitions ── */
-  function showGlobalLockout() {
+  function showLockout() {
     hide($('screen-lock'));
     hide($('page'));
     show($('screen-lockout'));
-    startClock('clock1', 1, init);
+    startClock(init);
   }
 
-  function showLock1() {
+  function showLock() {
     hide($('screen-lockout'));
     hide($('page'));
     show($('screen-lock'));
-    const f = getFails(1);
-    if (f > 0) hint('hint1', `${MAX_FAILS - f} Versuch${MAX_FAILS - f === 1 ? '' : 'e'} verbleibend`);
+    const f = getFails();
+    if (f > 0) $('hint').textContent = `${MAX_FAILS - f} Versuch${MAX_FAILS - f === 1 ? '' : 'e'} verbleibend`;
   }
 
-  function showPage() {
+  function showPage(persona) {
     hide($('screen-lock'));
     hide($('screen-lockout'));
     show($('page'));
-
-    if (msLeft(2) > 0) {
-      showArchiveLockout();
-    } else if (isAuthed(2)) {
-      showArchiveContent();
-    } else {
-      show($('archive-lock'));
-      hide($('archive-lockout'));
-      hide($('archive-content'));
-      const f = getFails(2);
-      if (f > 0) hint('hint2', `${MAX_FAILS - f} Versuch${MAX_FAILS - f === 1 ? '' : 'e'} verbleibend`);
-    }
-  }
-
-  function showArchiveLockout() {
-    hide($('archive-lock'));
-    hide($('archive-content'));
-    show($('archive-lockout'));
-    startClock('clock2', 2, () => { hide($('archive-lockout')); show($('archive-lock')); err('msg2', ''); hint('hint2', ''); });
-  }
-
-  function showArchiveContent() {
-    hide($('archive-lock'));
-    hide($('archive-lockout'));
-    show($('archive-content'));
+    document.querySelectorAll('.persona-section').forEach(el => hide(el));
+    show($(`persona-${persona}`));
+    decryptLinks(persona); /* async — fires in background, links appear once decrypted */
   }
 
   /* ── Password handler ── */
-  async function tryPw(lvl) {
-    const input = $(`pw${lvl}`);
+  async function tryPw() {
+    const input = $('pw');
     const val   = input.value;
     input.value = '';
     if (!val) return;
 
-    if (msLeft(lvl) > 0) { lvl === 1 ? showGlobalLockout() : showArchiveLockout(); return; }
+    if (msLeft() > 0) { showLockout(); return; }
 
-    const hash  = await sha256(val);
-    if (hash === H[lvl]) {
-      setAuthed(lvl);
-      err(`msg${lvl}`, '');
-      hint(`hint${lvl}`, '');
-      lvl === 1 ? showPage() : showArchiveContent();
+    const hash    = await sha256(val);
+    const persona = HASHES.findIndex(h => h === hash);
+    if (persona >= 0) {
+      await storeKey(val); /* derive + cache AES key before val is gone */
+      setAuthed(persona);
+      $('msg').textContent  = '';
+      $('hint').textContent = '';
+      showPage(persona);
     } else {
-      const f    = addFail(lvl);
+      const f    = addFail();
       const left = MAX_FAILS - f;
-      if (msLeft(lvl) > 0) {
-        lvl === 1 ? showGlobalLockout() : showArchiveLockout();
+      if (msLeft() > 0) {
+        showLockout();
       } else {
-        err(`msg${lvl}`, 'Falscher Schlüssel.');
-        hint(`hint${lvl}`, `${left} Versuch${left === 1 ? '' : 'e'} verbleibend`);
+        $('msg').textContent  = 'Falscher Schlüssel.';
+        $('hint').textContent = `${left} Versuch${left === 1 ? '' : 'e'} verbleibend`;
       }
     }
   }
 
-  /* ── Keyboard ── */
-  $('pw1').addEventListener('keydown', e => { if (e.key === 'Enter') tryPw(1); });
-  $('pw2').addEventListener('keydown', e => { if (e.key === 'Enter') tryPw(2); });
+  $('pw').addEventListener('keydown', e => { if (e.key === 'Enter') tryPw(); });
 
-  /* ── Placeholder cards: prevent # navigation ── */
-  document.querySelectorAll('[data-placeholder]').forEach(a => {
-    a.addEventListener('click', e => e.preventDefault());
-  });
-
-  /* ── Instagram lightbox: tile click opens the real widget in-page ── */
+  /* ── Instagram lightbox ── */
   const igLightbox = $('ig-lightbox');
 
   function openIgLightbox(postId) {
@@ -1083,9 +951,9 @@
 
   /* ── Boot ── */
   function init() {
-    if (msLeft(1) > 0)  { showGlobalLockout(); return; }
-    if (isAuthed(1))    { showPage();           return; }
-    showLock1();
+    if (msLeft()   > 0) { showLockout();            return; }
+    if (isAuthed())     { showPage(getPersona());    return; }
+    showLock();
   }
   init();
 </script>
