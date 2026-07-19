@@ -507,6 +507,59 @@
       padding: 1.5rem 0;
     }
 
+    /* ── Archive preview strip ── */
+    .archive-preview-eyebrow {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    .archive-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .archive-preview-tile {
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: var(--bg2);
+    }
+    .archive-preview-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      opacity: 0.65;
+      transition: opacity 0.3s;
+    }
+    .archive-preview-tile:hover img { opacity: 0.9; }
+
+    /* ── Photo strip inside the folder card itself (clickable, opens the album) ── */
+    .folder-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--bg2);
+    }
+    .folder-preview-tile {
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+    }
+    .folder-preview-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      opacity: 0.85;
+      transition: opacity 0.18s;
+    }
+    .folder-link:hover .folder-preview-tile img { opacity: 1; }
+
     /* ── Contact form ── */
     .contact-section {
       max-width: 660px;
@@ -816,18 +869,30 @@
       <h2 class="archive-title">Shooting-Ordner &amp; Links</h2>
       <div class="folder-grid">
         <!-- Encrypted with password B (HASHES[1]) — run encrypt_link.js with that password to add more -->
-        <a href="#" class="folder-link" data-enc="LhAC08K9dVusTFb3fMgUj9HLjdsRw8uW7kLuFYvPHk1YMXF-nInOSAf0j9hcimYzjP05LHxGmSPD27ot0FOcSw1uw15ZVpOhn0hAY5SYE6s9tKL1vw">
+        <a href="#" class="folder-link" data-enc="OWQ0yq3JOxps1kJoLqmRWmUsS9VsuO13CULQi2s35tk1RNAzIO8Jlz5lkSBdn6o7u2Bi6hs9ULF_DvZ-FPjg3Bph3Ejk1DOt9Ig2n7NmDGo8wqrxma-88g-75rQmJcnsQVc">
           <div class="folder-card">
             <div class="folder-info">
-              <p class="folder-name">Shared Album</p>
+              <p class="folder-name">Vroni &amp; Lukas – Shared Album</p>
               <p class="folder-meta">iCloud</p>
             </div>
             <span class="folder-tag">iCloud</span>
+          </div>
+          <div class="folder-preview-grid">
+            <div class="folder-preview-tile">
+              <img src="alissa/standesamt/2.png" alt="">
+            </div>
+            <div class="folder-preview-tile">
+              <img src="alissa/standesamt/1.png" alt="" style="object-position: 65% center;">
+            </div>
+            <div class="folder-preview-tile">
+              <img src="alissa/standesamt/3.png" alt="">
+            </div>
           </div>
         </a>
       </div>
     </div>
 
+    <!-- /personas -->
   </div>
 
 
